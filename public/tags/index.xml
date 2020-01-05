@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Kris Makes Things</title>
+    <link>https://krishamoud.me/tags/</link>
+    <description>Recent content in Tags on Kris Makes Things</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Jul 2017 05:03:27 -0400</lastBuildDate>
+    
+	<atom:link href="https://krishamoud.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>docker</title>
+      <link>https://krishamoud.me/tags/docker/</link>
+      <pubDate>Fri, 21 Jul 2017 05:03:27 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meteor</title>
+      <link>https://krishamoud.me/tags/meteor/</link>
+      <pubDate>Fri, 21 Jul 2017 05:03:27 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/meteor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongo</title>
+      <link>https://krishamoud.me/tags/mongo/</link>
+      <pubDate>Fri, 21 Jul 2017 05:03:27 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/mongo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>supervisord</title>
+      <link>https://krishamoud.me/tags/supervisord/</link>
+      <pubDate>Fri, 21 Jul 2017 05:03:27 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/supervisord/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>autoscaling</title>
+      <link>https://krishamoud.me/tags/autoscaling/</link>
+      <pubDate>Wed, 19 Jul 2017 20:22:25 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/autoscaling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>https://krishamoud.me/tags/aws/</link>
+      <pubDate>Wed, 19 Jul 2017 20:22:25 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>consul</title>
+      <link>https://krishamoud.me/tags/consul/</link>
+      <pubDate>Wed, 19 Jul 2017 20:22:25 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/consul/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ec2</title>
+      <link>https://krishamoud.me/tags/ec2/</link>
+      <pubDate>Wed, 19 Jul 2017 20:22:25 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/ec2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terraform</title>
+      <link>https://krishamoud.me/tags/terraform/</link>
+      <pubDate>Wed, 19 Jul 2017 20:22:25 -0400</pubDate>
+      
+      <guid>https://krishamoud.me/tags/terraform/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

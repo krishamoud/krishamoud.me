@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<html><head>
+    <title>Kris Hamoud Makes Things</title>
+
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="It's my blog :)">
+    <meta name="author" content="Kris Hamoud">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+    
+    <link id="theme-style" rel="stylesheet" href="/css/theme.css">
+    <link id="theme-style" rel="stylesheet" href="/css/footer.css">
+
+</head>
+<body>
+      <div class="main-wrapper d-flex flex-column sticky-footer-wrapper">
+<header class="header text-center">
+  <h1 class="blog-name pt-lg-4 mb-0"><a href="/">Kris Makes Things</a></h1>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" >
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div id="navigation" class="collapse navbar-collapse flex-column" >
+    <div class="profile-section pt-3 pt-lg-0">
+        <img class="profile-image mb-3 rounded-circle mx-auto" src="/profile.jpg" alt="image" >
+
+      <div class="bio mb-3">Traveler. Guy on the internet. Infrastructure engineer @ConvertKit<br><a href="/pages/about/">Find out more about me</a></div>
+      <ul class="social-list list-inline py-3 mx-auto">
+        
+        <li class="list-inline-item"><a href="https://github.com/krishamoud" target="_blank" rel="noopener noreferrer"><i class="fab fa-github-alt fa-fw"></i></a></li>
+        
+        <li class="list-inline-item"><a href="https://linkedin.com/in/kristopher-hamoud-17b34665" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+        
+        <li class="list-inline-item"><a href="https://twitter.com/krishamoud" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter fa-fw"></i></a></li>
+        
+      </ul>
+      <hr>
+    </div>
+
+    <ul class="navbar-nav flex-column text-left">
+      
+        
+      
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="https://krishamoud.me/pages/about/"><i class="fas fa-user fa-fw mr-2"></i>About</a>
+        </li>
+        
+      
+      <li class="nav-item ">
+          <a class="nav-link" href="/"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</header>
+<div class="flex-fill">
+
+	    <article class="blog-post px-3 py-5 p-md-5">
+		    <div class="container">
+			    <header class="blog-post-header">
+				    <h2 class="title mb-2">Terraform a Consul cluster with docker on EC2</h2>
+				    <div class="meta mb-3"><span class="date">Published
+
+
+
+
+
+
+2
+  years ago
+
+ago</span><span class="time">5 min read</span></div>
+			    </header>
+			    <div class="blog-post-body">
+            
+				    <p>The goal of this post is to teach you how to configure and launch a production quality, self-healing, Consul cluster using terraform and docker on AWS. This tutorial will be referenced in the future when I show you how to terraform a classic docker swarm.</p>
+<h3 id="consul-terraform-aws">Consul, Terraform, AWS</h3>
+<p><a href="https://www.consul.io/">Consul</a> is an open source software created by Hashicorp used for service discovery, configuration management, DNS, KV storage, and more. It’s a powerful tool, and it’s worth learning.</p>
+<p><a href="https://www.terraform.io/">Terraform</a> is another open source software created by Hashicorp. It is a simple tool that allows you to “Write, Plan, and Create Infrastructure as Code.” Terraform is another powerful tool that I think developers and sysOps people alike should learn to use.</p>
+<p><a href="https://aws.amazon.com/">AWS</a> is a cloud hosting service provided by the good people at Amazon. I am a big fan of how easy it is to use and how powerful the toolset is.</p>
+<h3 id="step-1-creating-the-consul-module">Step 1: Creating the Consul module</h3>
+<p>Terraform <a href="https://www.terraform.io/intro/getting-started/modules.html">modules</a> are powerful. They allow you to create a complex infrastructure that can be modified or duplicated just by changing a few variables.</p>
+<p>Create a new folder; I’ll call it <code>test</code>, where all your code will go and add a modules folder.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir test
+cd test
+mkdir -p modules/consul
+</code></pre></div><p>While in the root folder create your main terraform file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch main.tf
+</code></pre></div><p>Terraform files end with the extension <code>.tf</code>.  These files use a syntax called <a href="https://www.terraform.io/docs/configuration/syntax.html">HashiCorp Configuration Language (HCL)</a></p>
+<p>This file will be pretty simple.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">main</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">Setup</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">core</span> <span style="color:#66d9ef">provider</span> <span style="color:#66d9ef">information</span>.
+<span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;aws&#34;</span> {
+  region  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.region}&#34;</span>
+  access_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_access_key}&#34;</span>
+  secret_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_secret_key}&#34;</span>
+}
+
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#66d9ef">cluster</span>, <span style="color:#66d9ef">based</span> <span style="color:#66d9ef">on</span> <span style="color:#66d9ef">our</span> <span style="color:#66d9ef">consul</span> <span style="color:#66d9ef">module</span>.
+<span style="color:#66d9ef">module</span> <span style="color:#e6db74">&#34;consul-cluster&#34;</span> {
+
+}
+</code></pre></div><p>Ok, this should be easy enough to understand but here is whats going on.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;aws&#34;</span> {
+  region  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;us-east-1&#34;</span>
+  access_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_access_key}&#34;</span>
+  secret_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_secret_key}&#34;</span>
+}
+
+</code></pre></div><p>This block sets up the <a href="https://www.terraform.io/docs/providers/index.html">provider</a>.  Providers are typically the underlying IaaS platform.  All we're doing here is setting up the <code>AWS</code> provider with our secret credentials and region.  If you don't have an access and secret key you can get them <a href="https://console.aws.amazon.com/iam/home#/home">here</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">module</span> <span style="color:#e6db74">&#34;consul-cluster&#34;</span> {
+
+}
+</code></pre></div><p>This block is the beginning of our module. It doesn’t do anything useful or exciting yet.</p>
+<h3 id="step-2-variables">Step 2: Variables</h3>
+<p>We need to create a variable file in the root folder of our project so we can store our default variables.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch variables.tf
+</code></pre></div><p>A module without variables isn’t useful. I’m going to add all the necessary variables to the module block.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">module</span> <span style="color:#e6db74">&#34;consul-cluster&#34;</span> {
+  source          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./modules/consul&#34;</span>
+  region          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;us-east-1&#34;</span>
+  ec2_ami         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ami-d15a75c7&#34;</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">This</span> <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">ubuntu</span> <span style="color:#ae81ff">16</span>.<span style="color:#ae81ff">04</span> <span style="color:#66d9ef">AMI</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">us</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#66d9ef">east</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">region</span>
+  amisize         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;t2.micro&#34;</span>
+  min_size        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;3&#34;</span>
+  max_size        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;3&#34;</span>
+  key_name        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;your-aws-key&#34;</span>
+  asgname         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-asg&#34;</span>
+  aws_vpc         <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_vpc}&#34;</span>
+  vpc_zone_a      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.vpc_zone_a}&#34;</span>
+  vpc_zone_b      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.vpc_zone_b}&#34;</span>
+  root_url        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rootdomain.com&#34;</span>  
+}
+</code></pre></div><p>I'll go through each of these individually.</p>
+<p><code>source</code> is the location of the <code>module</code> code.</p>
+<p><code>region</code> is the region where we will deploy the cluster.</p>
+<p><code>ec2_ami</code> is the <code>AMI</code> we will use to deploy our <code>EC2</code> instances</p>
+<p><code>amisize</code> is the size of the <code>EC2</code> instance that we will be using.  A <code>t2.micro</code> will be good enough for demo purposes, and they are free for your first year using AWS.</p>
+<p><code>min_size</code> and <code>max_size</code> are the minima and maximum size of our auto-scaling group we will create.  More on this later.</p>
+<p><code>key_name</code> is the pem key file name that you can use to ssh into your instances.</p>
+<p><code>asgname</code> is the what we'll use to name our auto-scaling group that we will create later.</p>
+<p><code>aws_vpc</code> is going to be the ID of the <code>vpc</code> where we are deploying our cluster.  For this tutorial, I am using the default <code>vpc</code>.</p>
+<p><code>vpc_zone_a</code>, <code>vpc_zone_b</code> are the subnets of the default <code>vpc</code> where we will deploy our cluster.</p>
+<p><code>root_url</code> is the domain name that we own. The root URL is useful so we can use DNS to connect to our cluster rather than IP addresses.</p>
+<p>Next, we need to modify our <code>variables.tf</code> file to look like this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">test</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">variables</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;aws_vpc&#34;</span> {
+  default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vpc-xxxxxxxxx&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;vpc_zone_a&#34;</span> {
+  default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;subnet-xxxxxxxxx&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;vpc_zone_b&#34;</span> {
+  default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;subnet-xxxxxxxxx&#34;</span>
+}
+</code></pre></div><p>We will also need to create a <code>variables.tf</code> file within our consul module.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">cd</span> <span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span>
+<span style="color:#66d9ef">touch</span> <span style="color:#66d9ef">variables</span>.<span style="color:#66d9ef">tf</span>
+</code></pre></div><p>This file will contain all of our variables that we already defined above because our module doesn’t know what variables it needs. You may notice that I added a <code>hosted_zone</code> variable. For this tutorial, I’m using <code>Route53</code> for DNS and will need this later.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> .<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">variables</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;ec2_ami&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The EC2 ami to use&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;asgname&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Autoscaling group name&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;region&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Region where the ASG will be deployed&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;min_size&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Minimum size of the ASG&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;max_size&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximum size of the ASG&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;amisize&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Instance size of the consul nodes&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;key_name&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Key to be used to create the instances&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;aws_vpc&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The VPC to launch the cluster into&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;vpc_zone_a&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Zone A&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;vpc_zone_b&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Zone B&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;root_url&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The root url to use&#34;</span>
+}
+
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;hosted_zone&#34;</span> {
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The hosted zone ID to change the consul dns&#34;</span>
+  default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxxx&#34;</span>
+}
+</code></pre></div><h3 id="step-3-security-groups">Step 3: Security Groups</h3>
+<p>Within the directory <code>test/modules/consul</code> we need to create a <code>security-groups.tf</code> file.  Within this file (and most other <code>.tf</code> files) we are going to create <a href="https://www.terraform.io/docs/configuration/resources.html">resources</a>.  Resources are the most important things you will configure with Terraform.  Resources are the components of your infrastructure.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">touch</span> <span style="color:#66d9ef">security</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#66d9ef">groups</span>.<span style="color:#66d9ef">tf</span>
+</code></pre></div><p><code>security-groups.tf</code> should look like this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">test</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">security</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#66d9ef">groups</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">an</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">security</span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">VPC</span>, <span style="color:#66d9ef">which</span> <span style="color:#66d9ef">allows</span> <span style="color:#66d9ef">everything</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">VPC</span>
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">talk</span> <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">everything</span> <span style="color:#66d9ef">else</span>.
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_security_group&#34; &#34;consul-cluster-vpc&#34;</span> {
+  name        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-cluster-vpc&#34;</span>
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Default security group that allows inbound and outbound traffic from all instances in the VPC&#34;</span>
+  vpc_id      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_vpc}&#34;</span>
+
+  <span style="color:#66d9ef">ingress</span> {
+    from_port <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span>
+    to_port   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span>
+    protocol  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-1&#34;</span>
+    self      <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+  }
+
+  <span style="color:#66d9ef">egress</span> {
+    from_port <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span>
+    to_port   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span>
+    protocol  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-1&#34;</span>
+    cidr_blocks <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;0.0.0.0/0&#34;</span>]
+  }
+
+  <span style="color:#66d9ef">tags</span> {
+    Name    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Consul Cluster Internal VPC&#34;</span>
+    Project <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-cluster&#34;</span>
+  }
+}
+
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">a</span> <span style="color:#66d9ef">security</span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">allowing</span> <span style="color:#66d9ef">web</span> <span style="color:#66d9ef">access</span> <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">subnet</span>.
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_security_group&#34; &#34;consul-cluster-public-web&#34;</span> {
+  name        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-cluster-public-web&#34;</span>
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Security group that allows web traffic from internet&#34;</span>
+  vpc_id      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.aws_vpc}&#34;</span>
+
+  <span style="color:#66d9ef">ingress</span> {
+    from_port   <span style="color:#f92672">=</span> <span style="color:#ae81ff">8500</span>
+    to_port     <span style="color:#f92672">=</span> <span style="color:#ae81ff">8500</span>
+    protocol    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;tcp&#34;</span>
+    cidr_blocks <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;0.0.0.0/0&#34;</span>]
+  }
+
+  <span style="color:#66d9ef">tags</span> {
+    Name    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Consul Cluster Public Web&#34;</span>
+    Project <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-cluster&#34;</span>
+  }
+}
+</code></pre></div><p>Here we created two security groups. The first allows for all inbound traffic from instances within our VPC in this security group. The second allows for public access to port <code>8500</code>.  The Consul web UI listens on Port <code>8500</code>.</p>
+<h3 id="step-4-creating-iam-roles-policies-and-attaching-them">Step 4: Creating IAM roles, policies, and attaching them</h3>
+<p>For our instances to be able to get metadata about the other instances in the cluster, we have to create IAM roles and policies that give our instances the access they need to learn about each other.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">touch</span> <span style="color:#66d9ef">iam</span>.<span style="color:#66d9ef">tf</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">test</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">iam</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">This</span> <span style="color:#66d9ef">policy</span> <span style="color:#66d9ef">allows</span> <span style="color:#66d9ef">an</span> <span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">discover</span> <span style="color:#66d9ef">a</span> <span style="color:#66d9ef">consul</span> <span style="color:#66d9ef">cluster</span> <span style="color:#66d9ef">leader</span>.
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">It</span> <span style="color:#66d9ef">also</span> <span style="color:#66d9ef">allows</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">instances</span> <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">change</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">DNS</span> <span style="color:#66d9ef">record</span> <span style="color:#66d9ef">sets</span>
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_iam_policy&#34; &#34;leader-discovery&#34;</span> {
+  name        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-node-leader-discovery&#34;</span>
+  path        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>
+  description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This policy allows a consul server to discover a consul leader by examining the instances in a consul cluster Auto-Scaling group. It needs to describe the instances in the auto scaling group, then check the IPs of the instances.&#34;</span>
+  policy <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#66d9ef">EOF</span>
+{
+    <span style="color:#e6db74">&#34;Version&#34;: &#34;2012-10-17&#34;</span>,
+    <span style="color:#e6db74">&#34;Statement&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+        {
+            <span style="color:#e6db74">&#34;Sid&#34;: &#34;Stmt1468377974000&#34;</span>,
+            <span style="color:#e6db74">&#34;Effect&#34;: &#34;Allow&#34;</span>,
+            <span style="color:#e6db74">&#34;Action&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+                <span style="color:#e6db74">&#34;autoscaling:DescribeAutoScalingInstances&#34;</span>,
+                <span style="color:#e6db74">&#34;autoscaling:DescribeAutoScalingGroups&#34;</span>,
+                <span style="color:#e6db74">&#34;ec2:DescribeInstances&#34;</span>,
+                <span style="color:#e6db74">&#34;route53:ChangeResourceRecordSets&#34;</span>
+            ],
+            <span style="color:#e6db74">&#34;Resource&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+                <span style="color:#e6db74">&#34;*&#34;</span>
+            ]
+        }
+    ]
+}
+    <span style="color:#66d9ef">EOF</span>
+}
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">a</span> <span style="color:#66d9ef">role</span> <span style="color:#66d9ef">which</span> <span style="color:#66d9ef">consul</span> <span style="color:#66d9ef">instances</span> <span style="color:#66d9ef">will</span> <span style="color:#66d9ef">assume</span>.
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">This</span> <span style="color:#66d9ef">role</span> <span style="color:#66d9ef">has</span> <span style="color:#66d9ef">a</span> <span style="color:#66d9ef">policy</span> <span style="color:#66d9ef">saying</span> <span style="color:#66d9ef">it</span> <span style="color:#66d9ef">can</span> <span style="color:#66d9ef">be</span> <span style="color:#66d9ef">assumed</span> <span style="color:#66d9ef">by</span> <span style="color:#66d9ef">ec2</span>
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">instances</span>.
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_iam_role&#34; &#34;consul-instance-role&#34;</span> {
+  name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-instance-role&#34;</span>
+  assume_role_policy <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#66d9ef">EOF</span>
+{
+    <span style="color:#e6db74">&#34;Version&#34;: &#34;2012-10-17&#34;</span>,
+    <span style="color:#e6db74">&#34;Statement&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [
+        {
+            <span style="color:#e6db74">&#34;Action&#34;: &#34;sts:AssumeRole&#34;</span>,
+            <span style="color:#e6db74">&#34;Principal&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+                <span style="color:#e6db74">&#34;Service&#34;: &#34;ec2.amazonaws.com&#34;</span>
+            },
+            <span style="color:#e6db74">&#34;Effect&#34;: &#34;Allow&#34;</span>,
+            <span style="color:#e6db74">&#34;Sid&#34;: &#34;&#34;</span>
+        }
+    ]
+}
+<span style="color:#66d9ef">EOF</span>
+}
+
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">Attach</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">policies</span> <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">role</span>.
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_iam_policy_attachment&#34; &#34;consul-instance-leader-discovery&#34;</span> {
+  name       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-instance-leader-discovery&#34;</span>
+  roles      <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;${aws_iam_role.consul-instance-role.name}&#34;</span>]
+  policy_arn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${aws_iam_policy.leader-discovery.arn}&#34;</span>
+}
+
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span>  <span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">a</span> <span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">profile</span> <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">the</span> <span style="color:#66d9ef">role</span>.
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_iam_instance_profile&#34; &#34;consul-instance-profile&#34;</span> {
+  name  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-instance-profile&#34;</span>
+  roles <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;${aws_iam_role.consul-instance-role.name}&#34;</span>]
+}
+</code></pre></div><h3 id="step-5-templates">Step 5: Templates</h3>
+<p>This step is probably the most involved step. To create a self-healing consul cluster, we must create an auto-scaling group. To create an auto-scaling group, we must create a launch configuration. Launch configurations use templates to ensure we execute the same commands on every newly created <code>EC2</code> instance.</p>
+<p>First let’s create a folder within our consul module where we will keep our files, <code>cd</code> into it, and create two files we will use in our launch configuration.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir files
+cd files
+touch consul-node.sh
+touch docker.service
+</code></pre></div><p><code>consul-node.sh</code> is a bash script that will execute when the <code>EC2</code> instance first starts up.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span><span style="color:#75715e"># test/modules/consul/files/consul-node.sh</span>
+<span style="color:#75715e"># Log everything we do.</span>
+set -x
+exec &gt; /var/log/user-data.log 2&gt;&amp;<span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># # Update the packages, install aws cli.</span>
+apt-get update -y
+apt-get install python-setuptools -y
+easy_install pip
+pip install awscli
+
+<span style="color:#75715e"># # Install Docker, add ubuntu, start Docker and ensure startup on restart</span>
+curl -fsSL https://get.docker.com/ | sh
+usermod -a -G docker ubuntu
+
+<span style="color:#75715e"># A few variables we will refer to later...</span>
+ASG_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>asgname<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+REGION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>region<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+EXPECTED_SIZE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>size<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+HOSTED_ZONE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>hosted_zone<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+DOCKER_SERVICE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>docker_service<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e"># Return the id of each instance in the cluster.</span>
+<span style="color:#66d9ef">function</span> cluster-instance-ids <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Grab every line which contains &#39;InstanceId&#39;, cut on double quotes and grab the ID:</span>
+    <span style="color:#75715e">#    &#34;InstanceId&#34;: &#34;i-example123&#34;</span>
+    <span style="color:#75715e">#....^..........^..^.....#4.....^...</span>
+    aws --region<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$REGION<span style="color:#e6db74">&#34;</span> autoscaling describe-auto-scaling-groups --auto-scaling-group-name $ASG_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        | grep InstanceId <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        | cut -d <span style="color:#e6db74">&#39;&#34;&#39;</span> -f4
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># Return the private IP of each instance in the cluster.</span>
+<span style="color:#66d9ef">function</span> cluster-ips <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">for</span> id in <span style="color:#66d9ef">$(</span>cluster-instance-ids<span style="color:#66d9ef">)</span>
+    <span style="color:#66d9ef">do</span>
+        aws --region<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$REGION<span style="color:#e6db74">&#34;</span> ec2 describe-instances <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>            --query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Reservations[].Instances[].[PrivateIpAddress]&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>            --output<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>            --instance-ids<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$id<span style="color:#e6db74">&#34;</span>
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># Wait until we have as many cluster instances as we are expecting.</span>
+<span style="color:#66d9ef">while</span> COUNT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cluster-instance-ids | wc -l<span style="color:#66d9ef">)</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$COUNT<span style="color:#e6db74">&#34;</span> -lt <span style="color:#e6db74">&#34;</span>$EXPECTED_SIZE<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">do</span>
+    echo <span style="color:#e6db74">&#34;</span>$COUNT<span style="color:#e6db74"> instances in the cluster, waiting for </span>$EXPECTED_SIZE<span style="color:#e6db74"> instances to warm up...</span><span style="color:#e6db74">&#34;</span>
+    sleep <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">done</span>
+
+<span style="color:#75715e"># Get my IP address, all IPs in the cluster, then just the &#39;other&#39; IPs...</span>
+IP<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>curl http://169.254.169.254/latest/meta-data/local-ipv4<span style="color:#66d9ef">)</span>
+mapfile -t ALL_IPS &lt; &lt;<span style="color:#f92672">(</span>cluster-ips<span style="color:#f92672">)</span>
+OTHER_IPS<span style="color:#f92672">=</span><span style="color:#f92672">(</span> $$<span style="color:#f92672">{</span>ALL_IPS<span style="color:#f92672">[</span>@<span style="color:#f92672">]</span>/<span style="color:#f92672">{</span>$IP<span style="color:#f92672">}</span>/<span style="color:#f92672">}</span> <span style="color:#f92672">)</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Instance IP is: </span>$IP<span style="color:#e6db74">, Cluster IPs are: </span>$$<span style="color:#e6db74">{ALL_IPS[@]}, Other IPs are: </span>$$<span style="color:#e6db74">{OTHER_IPS[@]}</span><span style="color:#e6db74">&#34;</span>
+
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>docker_service<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /lib/systemd/system/docker.service
+systemctl daemon-reload
+systemctl restart docker
+<span style="color:#75715e"># Start the Consul server.</span>
+docker run -d --net<span style="color:#f92672">=</span>host <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --name<span style="color:#f92672">=</span>consul <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    consul agent -server -ui <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -bind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$IP<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -client<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -retry-join<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;consul.yourdomain.com&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -bootstrap-expect<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$EXPECTED_SIZE<span style="color:#e6db74">&#34;</span>
+
+<span style="color:#75715e"># Create the record set change file</span>
+RECORDS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>;
+IDX<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">&#34;</span>$$<span style="color:#e6db74">{ALL_IPS[@]}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">do</span>
+  VALUE<span style="color:#f92672">=</span>$i
+  echo $$VALUE
+  echo $$IDX
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$$<span style="color:#e6db74">IDX</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    RECORDS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$$<span style="color:#e6db74">RECORDS{\&#34;Value\&#34;:\&#34;</span>$$<span style="color:#e6db74">{VALUE}\&#34;}</span><span style="color:#e6db74">&#34;</span>;
+  <span style="color:#66d9ef">else</span>
+    RECORDS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$$<span style="color:#e6db74">RECORDS{\&#34;Value\&#34;:\&#34;</span>$$<span style="color:#e6db74">{VALUE}\&#34;},</span><span style="color:#e6db74">&#34;</span>;
+  <span style="color:#66d9ef">fi</span>
+  IDX<span style="color:#f92672">=</span>$$<span style="color:#f92672">(</span><span style="color:#f92672">(</span>IDX+1<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">done</span>
+echo $$RECORDS
+
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{
+</span><span style="color:#e6db74">  \&#34;Comment\&#34;: \&#34;dynamic consul dns changes when nodes die\&#34;,
+</span><span style="color:#e6db74">  \&#34;Changes\&#34;: [
+</span><span style="color:#e6db74">    {
+</span><span style="color:#e6db74">      \&#34;Action\&#34;: \&#34;UPSERT\&#34;,
+</span><span style="color:#e6db74">      \&#34;ResourceRecordSet\&#34;: {
+</span><span style="color:#e6db74">        \&#34;Name\&#34;: \&#34;consul.yourdomain.com\&#34;,
+</span><span style="color:#e6db74">        \&#34;Type\&#34;: \&#34;A\&#34;,
+</span><span style="color:#e6db74">        \&#34;TTL\&#34;: 300,
+</span><span style="color:#e6db74">        \&#34;ResourceRecords\&#34;: [
+</span><span style="color:#e6db74">          </span>$$<span style="color:#e6db74">{RECORDS}
+</span><span style="color:#e6db74">        ]
+</span><span style="color:#e6db74">      }
+</span><span style="color:#e6db74">    }
+</span><span style="color:#e6db74">  ]
+</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /home/ubuntu/change-record-sets.json
+
+aws route53 change-resource-record-sets --hosted-zone-id $HOSTED_ZONE --change-batch file:///home/ubuntu/change-record-sets.json
+</code></pre></div><p>The above bash script should be relatively easy to understand however there are a few syntax items that are different. That is because this is a bash template, not a bash script. We will use Terraform to pass in variables to the template that will make it a valid bash script.</p>
+<p><a href="https://www.terraform.io/docs/configuration/interpolation.html">Here is more information on Terraform template syntax</a></p>
+<p>Here is what's happening in the script above:</p>
+<ol>
+<li>Log the output of all commands to <code>/var/log/user-data.log</code>. Logging is useful because debugging AWS init scripts can be a pain.</li>
+<li>Update all the packages, install the AWS CLI, and install Docker.</li>
+<li>Create a function that will return all the instance ID's within the cluster</li>
+<li>Create a function that will return all the private IP's of the instances in the cluster</li>
+<li>Wait until we have the desired number of EC2 instances running before continuing</li>
+<li>Configure the Docker daemon</li>
+<li>Run consul in a Docker container.  See docs <a href="https://hub.docker.com/r/_/consul/">here</a></li>
+<li>Change the DNS record set to the private IP's of your consul cluster</li>
+</ol>
+<p>Step 8 might seem the most strange. In many cases, you would want to use an Elastic Load Balancer to keep track of the instances in your auto-scaling groups.  Since I am writing this tutorial as preparation for a classic docker swarm, terraform tutorial, and there is a <a href="https://github.com/docker/swarm/issues/2320">bug</a> that I haven’t been able to figure out I use raw IP’s rather than an ELB.</p>
+<p><code>docker.service</code> is a Terraform template used to set our Docker daemon configuration. Since I deployed this cluster on Ubuntu 16.04, I am using <code>systemd</code>. Here is how the docker configuration file looks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># test/modules/consul/files/docker.service</span>
+<span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+Description<span style="color:#f92672">=</span>Docker Application Container Engine
+Documentation<span style="color:#f92672">=</span>https://docs.docker.com
+After<span style="color:#f92672">=</span>network.target docker.socket firewalld.service
+Requires<span style="color:#f92672">=</span>docker.socket
+
+<span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+Type<span style="color:#f92672">=</span>notify
+<span style="color:#75715e"># the default is not to use systemd for cgroups because the delegate issues still</span>
+<span style="color:#75715e"># exists and systemd currently does not support the cgroup feature set required</span>
+<span style="color:#75715e"># for containers run by docker</span>
+ExecStart<span style="color:#f92672">=</span>/usr/bin/dockerd -H fd:// --log-driver<span style="color:#f92672">=</span>json-file --log-opt max-size<span style="color:#f92672">=</span>10m --log-opt max-file<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --storage-driver<span style="color:#f92672">=</span>overlay2 --dns 8.8.8.8 --dns 8.8.4.4 -H unix:///var/run/docker.sock
+ExecReload<span style="color:#f92672">=</span>/bin/kill -s HUP $MAINPID
+LimitNOFILE<span style="color:#f92672">=</span><span style="color:#ae81ff">1048576</span>
+<span style="color:#75715e"># Having non-zero Limit*s causes performance problems due to accounting overhead</span>
+<span style="color:#75715e"># in the kernel. We recommend using cgroups to do container-local accounting.</span>
+LimitNPROC<span style="color:#f92672">=</span>infinity
+LimitCORE<span style="color:#f92672">=</span>infinity
+<span style="color:#75715e"># Uncomment TasksMax if your systemd version supports it.</span>
+<span style="color:#75715e"># Only systemd 226 and above support this version.</span>
+TasksMax<span style="color:#f92672">=</span>infinity
+TimeoutStartSec<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#75715e"># set delegate yes so that systemd does not reset the cgroups of docker containers</span>
+Delegate<span style="color:#f92672">=</span>yes
+<span style="color:#75715e"># kill only the docker process, not all processes in the cgroup</span>
+KillMode<span style="color:#f92672">=</span>process
+
+<span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+WantedBy<span style="color:#f92672">=</span>multi-user.target
+</code></pre></div><p>The most important line is the <code>ExecStart</code>. Here I set <code>--log-driver</code> to <code>json-file</code>, set the <code>max-size</code> of the log files to <code>10MB</code>, I only want to keep one log file before rotating, set the storage driver to <a href="https://docs.docker.com/engine/userguide/storagedriver/overlayfs-driver/">overlay2</a>, and use the google DNS servers.</p>
+<p>Now that we have our Terraform templates, we need to render them with Terraform.</p>
+<p>Change directories up one level and create a <code>template.tf</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ..
+touch template.tf
+</code></pre></div><p>This file will be much simpler than the previous two.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">test</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">template</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#66d9ef">data</span> <span style="color:#e6db74">&#34;aws_route53_zone&#34; &#34;root_url&#34;</span> {
+  name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.root_url}&#34;</span>
+}
+
+<span style="color:#66d9ef">data</span> <span style="color:#e6db74">&#34;template_file&#34; &#34;consul&#34;</span> {
+  template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${file(&#34;${path.module}/files/consul-node.sh&#34;)}&#34;</span>
+
+  <span style="color:#66d9ef">vars</span> {
+    asgname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.asgname}&#34;</span>
+    region  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.region}&#34;</span>
+    size    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.min_size}&#34;</span>
+    hosted_zone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.hosted_zone}&#34;</span>
+    docker_service <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${data.template_file.docker-service.rendered}&#34;</span>
+  }
+}
+
+<span style="color:#66d9ef">data</span> <span style="color:#e6db74">&#34;template_file&#34; &#34;docker-service&#34;</span> {
+  template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${file(&#34;${path.module}/files/docker.service&#34;)}&#34;</span>
+}
+</code></pre></div><p><a href="https://www.terraform.io/docs/configuration/data-sources.html">data</a> is how information about the infrastructure gets retrieved.</p>
+<p>The two <code>template_file</code> data sources get the templates we created above, pass the variables that we used within the template, and render them to fully functional bash scripts and docker daemon configuration files.</p>
+<h3 id="step-6-launch-configurations">Step 6: Launch configurations</h3>
+<p>Now that we have our templates ready to go, we can create our launch configuration. Launch configurations make sure that Amazon starts every instance in our auto-scaling group the same way.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch launch-configuration.tf
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">test</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">launch</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#66d9ef">configuration</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_launch_configuration&#34; &#34;consul-cluster-lc&#34;</span> {
+  name_prefix          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-node-&#34;</span>
+  image_id             <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.ec2_ami}&#34;</span>
+  instance_type        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.amisize}&#34;</span>
+  user_data            <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${data.template_file.consul.rendered}&#34;</span>
+  iam_instance_profile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${aws_iam_instance_profile.consul-instance-profile.id}&#34;</span>
+
+  security_groups <span style="color:#f92672">=</span> [
+    <span style="color:#e6db74">&#34;${aws_security_group.consul-cluster-vpc.id}&#34;</span>,
+    <span style="color:#e6db74">&#34;${aws_security_group.consul-cluster-public-web.id}&#34;</span>,
+  ]
+
+  <span style="color:#66d9ef">lifecycle</span> {
+    create_before_destroy <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+  }
+
+  key_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.key_name}&#34;</span>
+}
+</code></pre></div><p>Here we set:</p>
+<ul>
+<li>The AMI we want</li>
+<li>The instance size</li>
+<li>The <code>user_data</code> (which is bash script we wrote above)</li>
+<li>The instance profile (which we created above)</li>
+<li>Add the security groups (which we created above)</li>
+<li>Ensure that we create new instances before we destroy old instances</li>
+<li>Set the keypair that we can use to SSH into the instance</li>
+</ul>
+<h3 id="step-7-create-the-auto-scaling-group">Step 7: Create the auto-scaling group</h3>
+<p>The last thing we need to do is create the auto-scaling group. After this, Amazon will start spinning up instances automatically, and we won't need to do anything.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">touch asg.tf
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">test</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">modules</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">consul</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#66d9ef">asg</span>.<span style="color:#66d9ef">tf</span>
+<span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#66d9ef">Auto</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#66d9ef">scaling</span> <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">our</span> <span style="color:#66d9ef">cluster</span>.
+<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_autoscaling_group&#34; &#34;consul-cluster-asg&#34;</span> {
+  depends_on           <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;aws_launch_configuration.consul-cluster-lc&#34;</span>]
+  name                 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.asgname}&#34;</span>
+  launch_configuration <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${aws_launch_configuration.consul-cluster-lc.name}&#34;</span>
+  min_size             <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.min_size}&#34;</span>
+  max_size             <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.max_size}&#34;</span>
+  vpc_zone_identifier  <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;${var.vpc_zone_a}&#34;, &#34;${var.vpc_zone_b}&#34;</span>]
+
+  <span style="color:#66d9ef">lifecycle</span> {
+    create_before_destroy <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+  }
+
+  <span style="color:#66d9ef">tag</span> {
+    key                 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Name&#34;</span>
+    value               <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Consul Node&#34;</span>
+    propagate_at_launch <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+  }
+
+  <span style="color:#66d9ef">tag</span> {
+    key                 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Project&#34;</span>
+    value               <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;consul-cluster&#34;</span>
+    propagate_at_launch <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+  }
+}
+</code></pre></div><p>This file <code>depends_on</code> the launch configuration we created above so Terraform wont run this until that resource has been created.</p>
+<p>Here we set:</p>
+<ul>
+<li>The autoscaling group name</li>
+<li>The launch configuration (which we created above)</li>
+<li>The minimum and maximum size (consul clusters should be either 3 or 5 instances big)</li>
+<li>Which subnets to launch the instances into</li>
+<li>Tags the instances with names so we can see them on the dashboard</li>
+</ul>
+<h3 id="thats-it">That's it!</h3>
+<p>If everything went according to plan, then you can run the following commands, and you will have a consul cluster in a few minutes.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ../..
+terraform get
+terraform plan
+terraform apply
+</code></pre></div>
+		    </div>
+	    </article>
+
+        </div>
+        <section class="cta-section theme-bg-light py-5">
+	<div class="container text-center">
+		<h2 class="heading">Join the Newsletter</h2>
+		<div class="intro">Subscribe to get my latest content by email.</div>
+		<script async data-uid="aefa95791a" src="https://kris.ck.page/aefa95791a/index.js"></script>
+	</div>
+</section>
+<footer class="footer py-2 theme-bg-dark">
+  <div class="container text-center">
+    <small class="copyright">Made with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="https://github.com/krishamoud" target="_blank">Kris Hamoud</a></small>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+<script src="/js/blog.js"></script>
+</div>
+    </body>
+</html>

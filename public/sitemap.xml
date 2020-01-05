@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://krishamoud.me/pages/about/</loc>
+    <lastmod>2019-08-18T21:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/</loc>
+    <lastmod>2019-08-18T21:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/pages/</loc>
+    <lastmod>2019-08-18T21:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/docker/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/meteor/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/mongo/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/posts/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/posts/meteor-docker-supervisord/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/supervisord/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/</loc>
+    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/autoscaling/</loc>
+    <lastmod>2017-07-19T20:22:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/aws/</loc>
+    <lastmod>2017-07-19T20:22:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/consul/</loc>
+    <lastmod>2017-07-19T20:22:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/ec2/</loc>
+    <lastmod>2017-07-19T20:22:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/terraform/</loc>
+    <lastmod>2017-07-19T20:22:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/posts/consul/</loc>
+    <lastmod>2017-07-19T20:22:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/categories/</loc>
+  </url>
+  
+</urlset>

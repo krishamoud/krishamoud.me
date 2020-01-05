@@ -1,0 +1,39 @@
+{{ $page := .Page }}
+<header class="header text-center">
+  <h1 class="blog-name pt-lg-4 mb-0"><a href="/">{{ .Site.Title }}</a></h1>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" >
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div id="navigation" class="collapse navbar-collapse flex-column" >
+    <div class="profile-section pt-3 pt-lg-0">
+        <img class="profile-image mb-3 rounded-circle mx-auto" src="{{ .Site.Params.profilePic }}" alt="image" >
+
+      <div class="bio mb-3">{{ .Site.Params.bio }}<br><a href="{{ .Site.Params.aboutURL }}">Find out more about me</a></div><!--//bio-->
+      <ul class="social-list list-inline py-3 mx-auto">
+        {{ range $key, $value := .Site.Params.social }}
+        <li class="list-inline-item"><a href="{{ $value }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-{{ $key }} fa-fw"></i></a></li>
+        {{ end }}
+      </ul>
+      <hr>
+    </div>
+
+    <ul class="navbar-nav flex-column text-left">
+      {{ range where .Site.Pages "Section" "pages"}}
+        {{ range .Pages}}
+        {{ $currentPath := printf "/pages/%s/" (lower .Title) }}
+        <li class="nav-item {{ if eq $currentPath $page.RelPermalink}}active{{end}}">
+            <a class="nav-link" href="{{ .Permalink }}"><i class="fas fa-user fa-fw mr-2"></i>{{ .Title }}</a>
+        </li>
+        {{end}}
+      {{ end }}
+      <li class="nav-item {{if eq .URL "/"}}active{{end}}">
+          <a class="nav-link" href="/"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</header>

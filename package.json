@@ -1,0 +1,14 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "krishamoud.me",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "hugo -v",
+    "deploy": "aws s3 sync public/ s3://krishamoud.me/ --delete --acl public-read --profile kris",
+    "start": "hugo server -ws ."
+  },
+  "author": "Kris Hamoud",
+  "license": "ISC"
+}

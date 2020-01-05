@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<html><head>
+    <title>Kris Hamoud Makes Things</title>
+
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="It's my blog :)">
+    <meta name="author" content="Kris Hamoud">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+    
+    <link id="theme-style" rel="stylesheet" href="/css/theme.css">
+    <link id="theme-style" rel="stylesheet" href="/css/footer.css">
+
+</head>
+<body>
+      <div class="main-wrapper d-flex flex-column sticky-footer-wrapper">
+<header class="header text-center">
+  <h1 class="blog-name pt-lg-4 mb-0"><a href="/">Kris Makes Things</a></h1>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" >
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div id="navigation" class="collapse navbar-collapse flex-column" >
+    <div class="profile-section pt-3 pt-lg-0">
+        <img class="profile-image mb-3 rounded-circle mx-auto" src="/profile.jpg" alt="image" >
+
+      <div class="bio mb-3">Traveler. Guy on the internet. Infrastructure engineer @ConvertKit<br><a href="/pages/about/">Find out more about me</a></div>
+      <ul class="social-list list-inline py-3 mx-auto">
+        
+        <li class="list-inline-item"><a href="https://github.com/krishamoud" target="_blank" rel="noopener noreferrer"><i class="fab fa-github-alt fa-fw"></i></a></li>
+        
+        <li class="list-inline-item"><a href="https://linkedin.com/in/kristopher-hamoud-17b34665" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+        
+        <li class="list-inline-item"><a href="https://twitter.com/krishamoud" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter fa-fw"></i></a></li>
+        
+      </ul>
+      <hr>
+    </div>
+
+    <ul class="navbar-nav flex-column text-left">
+      
+        
+      
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="https://krishamoud.me/pages/about/"><i class="fas fa-user fa-fw mr-2"></i>About</a>
+        </li>
+        
+      
+      <li class="nav-item ">
+          <a class="nav-link" href="/"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</header>
+<div class="flex-fill">
+
+	    <article class="blog-post px-3 py-5 p-md-5">
+		    <div class="container">
+			    <header class="blog-post-header">
+				    <h2 class="title mb-2">Running Meteor and Mongo in a Single Docker Container with Supervisord</h2>
+				    <div class="meta mb-3"><span class="date">Published
+
+
+
+
+
+
+2
+  years ago
+
+ago</span><span class="time">5 min read</span></div>
+			    </header>
+			    <div class="blog-post-body">
+            
+				    <p>The goal of this post is to show you how to run your meteor.js application with MongoDB in one Docker container.</p>
+<p><strong><em>Note:</em></strong> This should only be done for testing or prototypes.</p>
+<h3 id="step-1-get-the-example-app">Step 1: Get the example app</h3>
+<p>This tutorial was written as of <code>meteor 1.5.1</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/meteor/todos mongo-meteor
+cd mongo-meteor
+meteor npm install
+meteor update
+</code></pre></div><p><strong><em>Note:</em></strong> If you plan to run the application on <code>localhost</code> then you'll have to remove the <code>app-prod-security</code> package</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># .meteor/packages</span>
+...
+
+<span style="color:#75715e"># production</span>
+juliancwirko:postcss
+standard-minifier-js@2.1.1
+ddp-rate-limiter@1.0.7
+<span style="color:#75715e"># app-prod-security</span>
+</code></pre></div><h3 id="step-2-build-and-extract-the-application">Step 2: Build and extract the application</h3>
+<p>We're building the application for Linux, and I'm going to deploy it to Rompli.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">meteor build --architecture<span style="color:#f92672">=</span>os.linux.x86_64 --server https://todos.rompliapp.com:443 ../output
+cd ../output
+tar -zxvf mongo-meteor.tar.gz
+</code></pre></div><h3 id="step-3-supervisord">Step 3: Supervisord</h3>
+<p>For us to run meteor and mongo in the same container, we have to use <a href="http://supervisord.org/">supervisord</a>.</p>
+<p>We need to create a <code>supervisord.conf</code> file to run <code>mongod</code> first, then run <code>node main.js</code> which is the entry point for the built meteor app.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd bundle
+touch supervisord.conf
+</code></pre></div><p>Edit your newly created <code>supervisord.conf</code> file to look something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>supervisord<span style="color:#f92672">]</span>
+nodaemon<span style="color:#f92672">=</span>true
+
+<span style="color:#f92672">[</span>program:mongod<span style="color:#f92672">]</span>
+command<span style="color:#f92672">=</span>/usr/bin/mongod
+autorestart<span style="color:#f92672">=</span>true
+
+<span style="color:#f92672">[</span>program:meteor<span style="color:#f92672">]</span>
+directory<span style="color:#f92672">=</span>/bundle
+command<span style="color:#f92672">=</span>node main.js
+environment<span style="color:#f92672">=</span>
+          MONGO_URL<span style="color:#f92672">=</span>mongodb://localhost:27017/test,
+          ROOT_URL<span style="color:#f92672">=</span>https://localhost
+autorestart<span style="color:#f92672">=</span>true
+stderr_logfile<span style="color:#f92672">=</span>/dev/stderr
+stderr_logfile_maxbytes<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+stdout_logfile<span style="color:#f92672">=</span>/dev/stdout
+stdout_logfile_maxbytes<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="step-4-the-dockerfile">Step 4: The Dockerfile</h3>
+<p>I created the base image using <code>alpine:edge</code> that has <code>node 4.8.4</code>, <code>mongo</code>, and <code>supervisord</code> already installed and it's <code>224MB</code>.  If you can make a smaller image, please let me know how.</p>
+<script type="application/javascript" src="https://gist.github.com/krishamoud/2b8a21f1c9082b1ef557118343fad698.js"></script>
+
+<p>First, create the Dockerfile.</p>
+<pre><code>touch Dockerfile
+</code></pre><p>Edit the <code>Dockerfile</code> to look like this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> khamoud/node-supervisor-mongo</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . /bundle<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> supervisord.conf /etc/supervisor/conf.d/supervisord.conf<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache make gcc g++ python <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  cd /bundle/programs/server <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  npm install <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  npm uninstall -g npm <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  apk del make gcc g++ python <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  mkdir -p /var/log/supervisor <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  mkdir -p /data/db<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>
+<span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 80</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/usr/bin/supervisord&#34;</span>, <span style="color:#e6db74">&#34;-n&#34;</span>, <span style="color:#e6db74">&#34;--configuration&#34;</span>, <span style="color:#e6db74">&#34;/etc/supervisor/conf.d/supervisord.conf&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p><em>The compressed size of this container is 124MB</em></p>
+<p>The <code>RUN</code> instruction does the following:</p>
+<ul>
+<li>adds all the necessary dependencies to compile the node modules</li>
+<li><code>cd</code>'s into the bundle, and <code>npm install</code>'s everything</li>
+<li>after the <code>npm install</code> is complete, it removes all the compiler dependencies and <code>npm</code></li>
+<li>makes two directories</li>
+</ul>
+<p>We do this all in one step to decrease the number of layers being used which will ultimately give us a smaller image.</p>
+<h3 id="step-5-build-and-test-the-image">Step 5: Build and test the image</h3>
+<p>I'm going to build the image using my dockerhub username, but you should use your own.</p>
+<p><code>docker build -t khamoud/mongo-meteor .</code></p>
+<p>Next, run the image and see if everything worked according to plan.</p>
+<p><code>docker run -d -p 80:80 khamoud/mongo-meteor</code></p>
+<h3 id="thats-it">That's it!</h3>
+<p>You can see the image running
+<figure>
+    <img src="/supervisord-meteor-demo.png"
+         alt="Todos List with Meteor.js, mongo, and supervisord in one docker container" width="100%"/> 
+</figure>
+</p>
+
+		    </div>
+	    </article>
+
+        </div>
+        <section class="cta-section theme-bg-light py-5">
+	<div class="container text-center">
+		<h2 class="heading">Join the Newsletter</h2>
+		<div class="intro">Subscribe to get my latest content by email.</div>
+		<script async data-uid="aefa95791a" src="https://kris.ck.page/aefa95791a/index.js"></script>
+	</div>
+</section>
+<footer class="footer py-2 theme-bg-dark">
+  <div class="container text-center">
+    <small class="copyright">Made with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="https://github.com/krishamoud" target="_blank">Kris Hamoud</a></small>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+<script src="/js/blog.js"></script>
+</div>
+    </body>
+</html>

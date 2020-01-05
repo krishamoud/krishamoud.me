@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    {{- partial "head.html" . -}}
+    <body>
+      <div class="main-wrapper d-flex flex-column sticky-footer-wrapper">
+        {{- partial "header.html" . -}}
+        {{- partial "profile.html" . -}}
+        <div class="flex-fill">
+          {{- block "main" . }}{{- end }}
+        </div>
+        {{if ne .URL "/"}}
+        {{- partial "newsletter.html" . -}}
+        {{end}}
+        {{- partial "footer.html" . -}}
+      </div>
+    </body>
+</html>
