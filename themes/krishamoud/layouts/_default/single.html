@@ -1,19 +1,44 @@
 {{ define "main" }}
+<!-- Page Content -->
+{{ if eq .Section "examples" }}
+{{.Content}}
+{{else}}
+<div class="container">
+	<div class="row">
 
-	    <article class="blog-post px-3 py-5 p-md-5">
-		    <div class="container">
-			    <header class="blog-post-header">
-				    <h2 class="title mb-2">{{ .Title }}</h2>
-				    <div class="meta mb-3"><span class="date">Published {{- partial "time.html" . -}} ago</span><span class="time">5 min read</span></div>
-			    </header>
-			    <div class="blog-post-body">
-            {{ with .Params.header }}
-				    <figure class="blog-banner">
-				        <a href="{{ .link }}"><img class="img-fluid" src="{{ .image }}" alt="image"></a>
-				        <figcaption class="mt-2 text-center image-caption">Image Credit: <a href="{{ .creditlink }}" target="_blank" rel="noopener noreferrer">{{ .credit }}</a></figcaption>
-				    </figure>
-            {{ end }}
-				    {{ .Content }}
-		    </div>
-	    </article>
+		<!-- Post Content Column -->
+		<div class="col-lg-8">
+
+			<!-- Title -->
+			<h1 class="mt-4">{{ .Title }}</h1>
+			{{ if eq .Page.Section "posts" }}
+			<!-- Author -->
+			<p class="lead">
+				by
+				<a href="{{.Site.Params.social.twitter}}" target="_blank" rel="noopener noreferrer">{{.Site.Params.creator}}</a>
+			</p>
+
+			<hr>
+
+			<!-- Date/Time -->
+			<p>Posted {{.Date.Format "Monday, January 2, 2006"}}</p>
+
+			<hr>
+
+			<!-- Preview Image -->
+			<img class="img-fluid rounded" src="{{.Params.thumbnail}}" alt="">
+			{{end}}
+			<hr>
+			{{.Content}}
+			<hr>
+
+		</div>
+		<div class="col-md-4">
+			{{- partial "profile.html" . -}}
+		</div>
+
+	</div>
+
+</div>
+{{ end }}
 {{ end }}

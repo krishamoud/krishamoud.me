@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kris Makes Things</title>
+    <title>Kris Hamoud Makes Things</title>
     <link>https://krishamoud.me/</link>
-    <description>Recent content on Kris Makes Things</description>
+    <description>Recent content on Kris Hamoud Makes Things</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Aug 2019 21:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jan 2020 20:08:21 -0600</lastBuildDate>
     
 	<atom:link href="https://krishamoud.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Clare Example Section</title>
+      <link>https://krishamoud.me/examples/clare-example-section/</link>
+      <pubDate>Sun, 05 Jan 2020 20:08:21 -0600</pubDate>
+      
+      <guid>https://krishamoud.me/examples/clare-example-section/</guid>
+      <description> Example Blog  Welcome to my blog. Subscribe and get my latest content.     The rest of your content goes here    Made with  by Kris Hamoud   </description>
+    </item>
+    
+    <item>
+      <title>ConvertKit forms and Twitter Bootstrap</title>
+      <link>https://krishamoud.me/posts/convertkit-and-bootstrap/</link>
+      <pubDate>Thu, 02 Jan 2020 01:48:12 -0500</pubDate>
+      
+      <guid>https://krishamoud.me/posts/convertkit-and-bootstrap/</guid>
+      <description>Overview I have been working for ConvertKit for over a year now, and I haven&#39;t written a blog post in over two years. I&#39;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&#39;m not to be trusted to do frontend work. Despite my lack of design skills, I&#39;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&#39;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -17,7 +35,7 @@
       <pubDate>Sun, 18 Aug 2019 21:00:00 -0400</pubDate>
       
       <guid>https://krishamoud.me/pages/about/</guid>
-      <description>My name is Kris Hamoud. I&#39;m an infrastructure engineer for ConvertKit. I also like to travel. I want to use this blog to share the hard lessons I&#39;ve learned from designing and building software.</description>
+      <description>My name is Kris Hamoud. I&#39;m an infrastructure engineer for ConvertKit. I want to use this blog to share lessons I&#39;ve learned from designing and building software.</description>
     </item>
     
     <item>

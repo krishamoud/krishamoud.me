@@ -5,4 +5,4 @@ comments: false
 ---
 
 
-My name is Kris Hamoud. I'm an infrastructure engineer for [ConvertKit](https://convertkit.com).  I also like to travel.  I want to use this blog to share the hard lessons I've learned from designing and building software.
+My name is Kris Hamoud. I'm an infrastructure engineer for [ConvertKit](https://convertkit.com).  I want to use this blog to share lessons I've learned from designing and building software.

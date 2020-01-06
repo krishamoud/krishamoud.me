@@ -3,7 +3,7 @@ title: "Terraform a Consul cluster with docker on EC2"
 date: 2017-07-19T20:22:25-04:00
 subtitle: ""
 tags: ["terraform", "consul", "docker", "aws", "ec2", "autoscaling"]
-thumbnail: "/images/lava.jpg"
+thumbnail: "/images/terraform.jpg"
 readtime: "15 min"
 ---
 

@@ -1,17 +1,19 @@
 baseURL = "https://krishamoud.me"
 languageCode = "en-us"
-title = "Kris Makes Things"
+title = "Kris Hamoud Makes Things"
 theme = "krishamoud"
 staticDir = ["static"]
 
 [Params]
+  creator = "Kris Hamoud"
+  company = "ConvertKit"
+  companyURL = "https://convertkit.com"
   description = "Traveler. Guy on the internet. Infrastructure engineer @ConvertKit"
-  bio = "Traveler. Guy on the internet. Infrastructure engineer @ConvertKit"
+  bio = "Traveler. Guy on the internet. Infrastructure engineer"
   metadescription = "Used as 'description' meta tag for both home and index pages. If not set, 'description' will be used instead"
   aboutURL = "/pages/about/"
   image = "/cover.jpg"
-  profilePic = "/profile.jpg"
-  author = "Valère JEANTET"
+  profilePic = "/profile.png"
   authorlocation = "Paris, France"
   authorwebsite = "http://vjeantet.fr"
   authorbio= "my bio"

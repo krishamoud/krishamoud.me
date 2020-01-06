@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<html><head>
+    <title>ConvertKit forms and Twitter Bootstrap</title>
+
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Overview I have been working for ConvertKit for over a year now, and I haven&#39;t written a blog post in over two years. I&#39;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&#39;m not to be trusted to do frontend work. Despite my lack of design skills, I&#39;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&#39;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good.">
+    <meta name="author" content="Kris Hamoud">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta property="og:title" content="ConvertKit forms and Twitter Bootstrap">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2020-01-02">
+    
+    <meta property="og:description" content="Overview I have been working for ConvertKit for over a year now, and I haven&#39;t written a blog post in over two years. I&#39;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&#39;m not to be trusted to do frontend work. Despite my lack of design skills, I&#39;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&#39;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good.">
+    <meta property="og:url" content="https://krishamoud.me/posts/convertkit-and-bootstrap/">
+    <meta property="og:site_name" content="Kris Hamoud Makes Things">
+    
+    <meta property="og:image" content="https://krishamoud.me/images/design.jpg">
+    
+    
+    
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:domain" value="https://krishamoud.me" />
+    <meta name="twitter:title" value="ConvertKit forms and Twitter Bootstrap" />
+    <meta name="twitter:description" value="Overview I have been working for ConvertKit for over a year now, and I haven&#39;t written a blog post in over two years. I&#39;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&#39;m not to be trusted to do frontend work. Despite my lack of design skills, I&#39;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&#39;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good." />
+    <meta name="twitter:image" value="https://krishamoud.me/images/design.jpg" />
+
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+    
+    <link id="theme-style" rel="stylesheet" href="/css/theme.css">
+    <link id="theme-style" rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Kris Hamoud Makes Things</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+     <ul class="navbar-nav ml-auto">
+       <li class="nav-item ">
+         <a class="nav-link" href="/">Home</a>
+       </li>
+       
+        
+      
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="https://krishamoud.me/pages/about/">About</a>
+        </li>
+        
+      
+     </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="main-wrapper d-flex flex-column sticky-footer-wrapper"><div class="flex-fill">
+
+
+<div class="container">
+	<div class="row">
+
+		
+		<div class="col-lg-8">
+
+			
+			<h1 class="mt-4">ConvertKit forms and Twitter Bootstrap</h1>
+			
+			
+			<p class="lead">
+				by
+				<a href="https://twitter.com/krishamoud" target="_blank" rel="noopener noreferrer">Kris Hamoud</a>
+			</p>
+
+			<hr>
+
+			
+			<p>Posted Thursday, January 2, 2020</p>
+
+			<hr>
+
+			
+			<img class="img-fluid rounded" src="/images/design.jpg" alt="">
+			
+			<hr>
+			<h2 id="overview">Overview</h2>
+<p>I have been working for <a href="https://convertkit.com">ConvertKit</a> for over a year now, and I haven't written a blog post in over two years.  I'm an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I'm not to be trusted to do frontend work.  Despite my lack of design skills, I've been wanting to write more and publish articles on my own website.  Since working at ConvertKit, I've learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate <a href="https://convertkit.com/features/forms">ConvertKit forms</a> with it, and make it look good.</p>
+<p>I might not be a designer, but I do know how to twitter some bootstrap.  I spent the weekend redesigning my blog using the <a href="https://startbootstrap.com/templates/blog-post/">blog post</a>, and <a href="https://startbootstrap.com/templates/blog-home/">blog home</a> templates provided by <a href="https://startbootstrap.com/">Start Bootstrap</a>.  The goal of this post is to show you how you can seamlessly integrate ConvertKit forms with twitter bootstrap for your own site.</p>
+<h3 id="picking-the-right-display-for-the-element">Picking the right display for the element</h3>
+<p>ConvertKit offers four display formats for forms.  They are:</p>
+<ol>
+<li>Inline</li>
+<li>Modal</li>
+<li>Slide in</li>
+<li>Sticky bar</li>
+</ol>
+<p>Because all the forms on this site are currently inline, I'll only be going over the <strong>Inline</strong> format.  If I ever add any of the other three, I'll update this post.  Within the <strong>Inline</strong> form format, there are <em><em>six</em></em> templates from which to choose.  In my opinion, Bootstrap Cards and Sections are the two best components to use in conjunction with ConvertKit forms.  They offer great flexibility and ease of use.</p>
+<h4 id="bootstrap-cards">Bootstrap Cards</h4>
+<p>I like these the most, and they are currently the only way I show my forms on this site, but they can be used in multiple different ways.</p>
+<h5 id="charlotte-form">Charlotte Form</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card my-4&#34;</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5f9183d72c&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/5f9183d72c/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="card my-4">
+  <script async data-uid="5f9183d72c" src="https://kris.ck.page/5f9183d72c/index.js"></script>
+</div>
+
+
+<hr>
+<h5 id="clare-form">Clare Form</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card my-4&#34;</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-body&#34;</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;b6e72799f4&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/b6e72799f4/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="card my-4">
+  <div class="card-body">
+    <script async data-uid="b6e72799f4" src="https://kris.ck.page/b6e72799f4/index.js"></script>
+  </div>
+</div>
+
+
+<hr>
+<h5 id="mills-form">Mills Form</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card my-4&#34;</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0b8223d1cb&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/0b8223d1cb/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="card my-4">
+  <script async data-uid="0b8223d1cb" src="https://kris.ck.page/0b8223d1cb/index.js"></script>
+</div>
+
+
+<hr>
+<h5 id="pine-form">Pine Form</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card my-4&#34;</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2fefbfa3f3&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/2fefbfa3f3/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="card my-4">
+  <script async data-uid="2fefbfa3f3" src="https://kris.ck.page/2fefbfa3f3/index.js"></script>
+</div>
+
+
+<hr>
+<h5 id="powell-form">Powell Form</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card my-4&#34;</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ce1b6394aa&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/ce1b6394aa/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="card my-4">
+  <script async data-uid="ce1b6394aa" src="https://kris.ck.page/ce1b6394aa/index.js"></script>
+</div>
+
+
+<hr>
+<h5 id="rainier-form">Rainier Form</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card my-4&#34;</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;753637692a&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/753637692a/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="card my-4">
+  <script async data-uid="753637692a" src="https://kris.ck.page/753637692a/index.js"></script>
+</div>
+
+
+<h5 id="bootstrapping-the-cards">Bootstrapping the Cards</h5>
+<p>They don't look any different than when we created them in the ConvertKit form builder, but when we combine them with the other elements of twitter bootstrap, we can do some cool stuff, and because it's bootstrap it's mobile responsive.</p>
+<p><strong>Real life example:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col-md-6&#34;</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card profile&#34;</span> &gt;
+    &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-img-top&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/profile.png&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Card image cap&#34;</span>&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-body&#34;</span>&gt;
+        &lt;<span style="color:#f92672">h5</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-title&#34;</span>&gt;Kris Hamoud&lt;/<span style="color:#f92672">h5</span>&gt;
+        &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-text&#34;</span>&gt;Traveler. Guy on the internet. Infrastructure engineer &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://convertkit.com&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;noopener noreferrer&#34;</span>&gt;@ConvertKit&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+
+          &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/krishamoud&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-link&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;noopener noreferrer&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fab fa-github-alt fa-fw&#34;</span>&gt;&lt;/<span style="color:#f92672">i</span>&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+
+          &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://linkedin.com/in/kristopher-hamoud-17b34665&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-link&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;noopener noreferrer&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fab fa-linkedin-in fa-fw&#34;</span>&gt;&lt;/<span style="color:#f92672">i</span>&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+
+          &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://twitter.com/krishamoud&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-link&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;noopener noreferrer&#34;</span>&gt;&lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fab fa-twitter fa-fw&#34;</span>&gt;&lt;/<span style="color:#f92672">i</span>&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+          &lt;<span style="color:#f92672">hr</span>&gt;
+      &lt;<span style="color:#f92672">h5</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-title&#34;</span>&gt;Newsletter&lt;/<span style="color:#f92672">h5</span>&gt;
+      &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;card-text&#34;</span>&gt;Subscribe to get my latest content by email.&lt;/<span style="color:#f92672">p</span>&gt;
+      &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;d2bb073bb7&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/d2bb073bb7/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div>
+<div class="col-md-6">
+  <div class="card profile" >
+    <img class="card-img-top" src="/profile.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Kris Hamoud</h5>
+        <p class="card-text">Traveler. Guy on the internet. Infrastructure engineer <a href="https://convertkit.com" target="_blank"_ rel="noopener noreferrer">@ConvertKit</a></p>
+
+          <a href="https://github.com/krishamoud" class="card-link" target="_blank"_ rel="noopener noreferrer"><i class="fab fa-github-alt fa-fw"></i></a>
+
+          <a href="https://linkedin.com/in/kristopher-hamoud-17b34665" class="card-link" target="_blank"_ rel="noopener noreferrer"><i class="fab fa-linkedin-in fa-fw"></i></a>
+
+          <a href="https://twitter.com/krishamoud" class="card-link" target="_blank"_ rel="noopener noreferrer"><i class="fab fa-twitter fa-fw"></i></a>
+          <hr>
+      <h5 class="card-title">Newsletter</h5>
+      <p class="card-text">Subscribe to get my latest content by email.</p>
+      <script async data-uid="d2bb073bb7" src="https://kris.ck.page/d2bb073bb7/index.js"></script>
+    </div>
+  </div>
+</div>
+
+
+<hr>
+<h4 id="bootstrap-section">Bootstrap Section</h4>
+<p>These can be used as call-to-actions and are useful to get visitors&rsquo; attention to do something.  I think this one looks best with the Clare form.  Because of the styling on this page, I'm going to put it in an <code>iframe</code> and also link to the page.</p>
+<h5 id="clare-section">Clare Section</h5>
+<p><a href="/examples/clare-example-section/">Check out the page</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">section</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;py-5 bg-light py-5&#34;</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container text-center&#34;</span>&gt;
+    &lt;<span style="color:#f92672">h2</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;heading&#34;</span>&gt;Example Blog &lt;/<span style="color:#f92672">h2</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;intro&#34;</span>&gt;Welcome to my blog. Subscribe and get my latest content.&lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">data-uid</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;b6e72799f4&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://kris.ck.page/b6e72799f4/index.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;<span style="color:#75715e">&lt;!--</span><span style="color:#75715e">//container</span><span style="color:#75715e">--&gt;</span>
+&lt;/<span style="color:#f92672">section</span>&gt;
+&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;main-wrapper d-flex flex-column sticky-footer-wrapper&#34;</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;flex-fill&#34;</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
+    &lt;<span style="color:#f92672">h1</span>&gt; The rest of your content goes here&lt;/<span style="color:#f92672">h1</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+&lt;<span style="color:#f92672">footer</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;footer py-2 bg-dark&#34;</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container text-center text-white&#34;</span>&gt;
+    &lt;<span style="color:#f92672">small</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;copyright&#34;</span>&gt;Made with &lt;<span style="color:#f92672">i</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fas fa-heart&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;color: #fb866a;&#34;</span>&gt;&lt;/<span style="color:#f92672">i</span>&gt; by &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/krishamoud&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span>&gt;Kris Hamoud&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">small</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+&lt;/<span style="color:#f92672">footer</span>&gt;
+</code></pre></div>
+<iframe src="/examples/clare-example-section/" width="100%" height="500"></iframe>
+
+
+<hr>
+<h3 id="conclusion">Conclusion</h3>
+<p>ConvertKit forms are easily embedded into HTML.  Using bootstrap makes it even easier to format your forms, so they match the look and feel of your site.  Alternatively, you don't have to build your own website at all and can use <a href="https://convertkit.com/features/landing-pages">ConvertKit Free Landing Pages</a>.  They are easy to set up and get started, and they were crafted from the ground up by the incredibly talented designers at ConvertKit.  You can visit mine at <a href="https://kris.ck.page">https://kris.ck.page</a>.</p>
+<p>If you enjoyed reading this, please consider signing up for my email list using <em>any</em> of the forms above, and I'll continue pushing out content.</p>
+<p><strong>NEXT:</strong> I'll be taking this post one step further and integrating the twitter bootstrap cards and sections above with <a href="https://gohugo.io/">Hugo</a>, which is the static site generator powering this site.</p>
+
+			<hr>
+
+		</div>
+		<div class="col-md-4">
+<div class="card profile" style="margin-top: 6rem;">
+  <img class="card-img-top" src="/profile.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Kris Hamoud</h5>
+      <p class="card-text">Traveler. Guy on the internet. Infrastructure engineer <a href="https://convertkit.com" target="_blank" rel="noopener noreferrer">@ConvertKit</a></p>
+      
+        <a href="https://github.com/krishamoud" class="card-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github-alt fa-fw"></i></a>
+      
+        <a href="https://linkedin.com/in/kristopher-hamoud-17b34665" class="card-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in fa-fw"></i></a>
+      
+        <a href="https://twitter.com/krishamoud" class="card-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter fa-fw"></i></a>
+      
+      <hr>
+    <h5 class="card-title">Newsletter</h5>
+    <p class="card-text">Subscribe to get my latest content by email.</p>
+    <script async data-uid="d2bb073bb7" src="https://kris.ck.page/d2bb073bb7/index.js"></script>
+  </div>
+</div>
+</div>
+
+	</div>
+
+</div>
+
+
+        </div><footer class="footer py-2 bg-dark">
+  <div class="container text-center text-white">
+    <small class="copyright">Made with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="https://github.com/krishamoud" target="_blank">Kris Hamoud</a></small>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+<script src="/js/blog.js"></script>
+</div>
+      
+    </body>
+</html>

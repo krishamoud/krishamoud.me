@@ -3,16 +3,17 @@
 <html>
     {{- partial "head.html" . -}}
     <body>
+      {{- partial "nav.html" . -}}
+      {{ if ne .Section "examples" }}
       <div class="main-wrapper d-flex flex-column sticky-footer-wrapper">
         {{- partial "header.html" . -}}
-        {{- partial "profile.html" . -}}
         <div class="flex-fill">
           {{- block "main" . }}{{- end }}
         </div>
-        {{if ne .URL "/"}}
-        {{- partial "newsletter.html" . -}}
-        {{end}}
         {{- partial "footer.html" . -}}
       </div>
+      {{ else }}
+        {{- block "main" . }}{{- end }}
+      {{ end }}
     </body>
 </html>

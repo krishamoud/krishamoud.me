@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Kris Makes Things</title>
+    <title>Posts on Kris Hamoud Makes Things</title>
     <link>https://krishamoud.me/posts/</link>
-    <description>Recent content in Posts on Kris Makes Things</description>
+    <description>Recent content in Posts on Kris Hamoud Makes Things</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jul 2017 05:03:27 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jan 2020 01:48:12 -0500</lastBuildDate>
     
 	<atom:link href="https://krishamoud.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ConvertKit forms and Twitter Bootstrap</title>
+      <link>https://krishamoud.me/posts/convertkit-and-bootstrap/</link>
+      <pubDate>Thu, 02 Jan 2020 01:48:12 -0500</pubDate>
+      
+      <guid>https://krishamoud.me/posts/convertkit-and-bootstrap/</guid>
+      <description>Overview I have been working for ConvertKit for over a year now, and I haven&#39;t written a blog post in over two years. I&#39;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&#39;m not to be trusted to do frontend work. Despite my lack of design skills, I&#39;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&#39;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good.</description>
+    </item>
     
     <item>
       <title>Running Meteor and Mongo in a Single Docker Container with Supervisord</title>
