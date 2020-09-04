@@ -1,0 +1,23 @@
+<footer>
+    <p>
+        <!-- &copy; {{ now.Format "2006"}}. Made with 💕 with <a href="https://gohugo.io/" target="_blank">Hugo</a> and <a href="https://tailwindcss.com/" target="_blank">TailwindCSS</a>. -->
+    </p>
+</footer>
+<script>
+  if('serviceWorker' in navigator) {
+      navigator.serviceWorker
+          .register('/sw.js', { scope: '/' })
+          .then(function(registration) {
+              //console.log('Service Worker Registered');
+          });
+
+      navigator.serviceWorker
+          .ready
+          .then(function(registration) {
+              //console.log('Service Worker Ready');
+          });
+  }
+</script>
+{{ if not (in (string .Site.BaseURL) "localhost") }}
+  {{ template "_internal/google_analytics_async.html" . }}
+{{ end }}

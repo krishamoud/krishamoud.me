@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang='{{ .Site.LanguageCode }}'>
+    {{ partial "head.html" . }}
+    <body class="font-serif bg-gray-200 border-t-4 border-blue-500 antialiased">
+      <div class="w-full p-6 md:w-2/3 md:px-0 md:mx-auto xl:w-2/5">
+        <!-- {{- partial "dev-size-indicator.html" . -}} -->
+        {{- partial "header.html" . -}}
+        {{- block "main" . }}{{- end }}
+        <!-- {{- partial "dev-parameters.html" . -}} -->
+        {{- partial "newsletter.html" . -}}
+        {{- partial "footer.html" . -}}
+      </div>
+    </body>
+</html>

@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Kris Hamoud Makes Things</title>
+    <title>Posts on Kris Hamoud</title>
     <link>https://krishamoud.me/posts/</link>
-    <description>Recent content in Posts on Kris Hamoud Makes Things</description>
+    <description>Recent content in Posts on Kris Hamoud</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Jan 2020 01:48:12 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2020 22:31:50 -0500</lastBuildDate>
     
 	<atom:link href="https://krishamoud.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open Hugo Links in New Tabs using target _blank</title>
+      <link>https://krishamoud.me/posts/open-hugo-links-in-new-tabs/</link>
+      <pubDate>Thu, 03 Sep 2020 22:31:50 -0500</pubDate>
+      
+      <guid>https://krishamoud.me/posts/open-hugo-links-in-new-tabs/</guid>
+      <description>Motivation By default Hugo links drive visitors off your website. I don&amp;rsquo;t like that so I figured out how to open links using target=&amp;quot;_blank&amp;quot;.
+Change the Default Markup In your Hugo theme add the file themes/your-theme/layouts/_default/_markup/render-link.html and make it look like the this.
+&amp;lt;!-- themes/your-theme/layouts/_default/_markup/render-link.html --&amp;gt; &amp;lt;a href=&amp;#34;{{ .Destination | safeURL }}&amp;#34;{{ with .Title}} title=&amp;#34;{{ . }}&amp;#34;{{ end }}{{ if strings.HasPrefix .Destination &amp;#34;http&amp;#34; }} rel=&amp;#34;noopener noreferrer&amp;#34; target=&amp;#34;_blank&amp;#34;{{ end }}&amp;gt;{{ .Text }}&amp;lt;/a&amp;gt; Now all links will open in new tabs.</description>
+    </item>
+    
+    <item>
+      <title>The Most Useful Hugo Theme Partial</title>
+      <link>https://krishamoud.me/posts/useful-hugo-theme-partial/</link>
+      <pubDate>Sun, 23 Aug 2020 13:20:43 -0500</pubDate>
+      
+      <guid>https://krishamoud.me/posts/useful-hugo-theme-partial/</guid>
+      <description>If you&amp;rsquo;re building a new Hugo theme, this is the most useful partial for debugging purposes. It will show the page variables available to you on any given page.
+Output Hugo Variables for the current page.  Variable Value    .Name &#34;The Most Useful Hugo Theme Partial&#34;  .Title &#34;The Most Useful Hugo Theme Partial&#34;  .Kind &#34;page&#34;  .Type &#34;posts&#34;  .IsPage true  .IsHome false  .</description>
+    </item>
     
     <item>
       <title>ConvertKit forms and Twitter Bootstrap</title>
@@ -17,11 +38,11 @@
       <pubDate>Thu, 02 Jan 2020 01:48:12 -0500</pubDate>
       
       <guid>https://krishamoud.me/posts/convertkit-and-bootstrap/</guid>
-      <description>Overview I have been working for ConvertKit for over a year now, and I haven&#39;t written a blog post in over two years. I&#39;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&#39;m not to be trusted to do frontend work. Despite my lack of design skills, I&#39;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&#39;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good.</description>
+      <description>Overview I have been working for ConvertKit for over a year now, and I haven&amp;rsquo;t written a blog post in over two years. I&amp;rsquo;m an infrastructure engineer at ConvertKit, which means I spend my working days looking at Linux terminals, and I&amp;rsquo;m not to be trusted to do frontend work. Despite my lack of design skills, I&amp;rsquo;ve been wanting to write more and publish articles on my own website. Since working at ConvertKit, I&amp;rsquo;ve learned the importance of an email list, so I decided to challenge myself to rebuild my blog, integrate ConvertKit forms with it, and make it look good.</description>
     </item>
     
     <item>
-      <title>Running Meteor and Mongo in a Single Docker Container with Supervisord</title>
+      <title>Two Processes One Docker Container with Supervisord</title>
       <link>https://krishamoud.me/posts/meteor-docker-supervisord/</link>
       <pubDate>Fri, 21 Jul 2017 05:03:27 -0400</pubDate>
       
@@ -29,7 +50,7 @@
       <description>The goal of this post is to show you how to run your meteor.js application with MongoDB in one Docker container.
 Note: This should only be done for testing or prototypes.
 Step 1: Get the example app This tutorial was written as of meteor 1.5.1
-git clone https://github.com/meteor/todos mongo-meteor cd mongo-meteor meteor npm install meteor update Note: If you plan to run the application on localhost then you&#39;ll have to remove the app-prod-security package</description>
+git clone https://github.com/meteor/todos mongo-meteor cd mongo-meteor meteor npm install meteor update Note: If you plan to run the application on localhost then you&amp;rsquo;ll have to remove the app-prod-security package</description>
     </item>
     
     <item>

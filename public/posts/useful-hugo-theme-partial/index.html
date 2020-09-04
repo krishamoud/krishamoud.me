@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#edf2f7" />
+    <link rel="canonical" href="https://krishamoud.me/posts/useful-hugo-theme-partial/" />
+    <title>The Most Useful Hugo Theme Partial | Kris Hamoud</title>
+    <meta name="description" content="If you&rsquo;re building a new Hugo theme, this is the most useful partial for debugging purposes. It will show the page variables available to you on any given page.
+Output Hugo Variables for the current page.  Variable Value    .Name &#34;The Most Useful Hugo Theme Partial&#34;  .Title &#34;The Most Useful Hugo Theme Partial&#34;  .Kind &#34;page&#34;  .Type &#34;posts&#34;  .IsPage true  .IsHome false  ."><meta name="generator" content="Hugo 0.74.3" /><link rel="stylesheet" href="https://krishamoud.me/css/styles.min.bcd56a619d87c9cc59c02c7df1d26cf2fbf0b73436dcc08f05f90c849cc722d2.css">
+    <meta property="og:title" content="The Most Useful Hugo Theme Partial" />
+<meta property="og:description" content="If you&rsquo;re building a new Hugo theme, this is the most useful partial for debugging purposes. It will show the page variables available to you on any given page.
+Output Hugo Variables for the current page.  Variable Value    .Name &#34;The Most Useful Hugo Theme Partial&#34;  .Title &#34;The Most Useful Hugo Theme Partial&#34;  .Kind &#34;page&#34;  .Type &#34;posts&#34;  .IsPage true  .IsHome false  ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://krishamoud.me/posts/useful-hugo-theme-partial/" />
+<meta property="og:image" content="https://krishamoud.me/hugo-partial.jpg" />
+<meta property="article:published_time" content="2020-08-23T13:20:43-05:00" />
+<meta property="article:modified_time" content="2020-08-23T13:20:43-05:00" />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krishamoud.me/hugo-partial.jpg"/>
+
+<meta name="twitter:title" content="The Most Useful Hugo Theme Partial"/>
+<meta name="twitter:description" content="If you&rsquo;re building a new Hugo theme, this is the most useful partial for debugging purposes. It will show the page variables available to you on any given page.
+Output Hugo Variables for the current page.  Variable Value    .Name &#34;The Most Useful Hugo Theme Partial&#34;  .Title &#34;The Most Useful Hugo Theme Partial&#34;  .Kind &#34;page&#34;  .Type &#34;posts&#34;  .IsPage true  .IsHome false  ."/>
+
+    <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+          href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700&display=swap"
+          rel="stylesheet"
+          type="text/css"
+      />
+    </noscript>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-icon-180x180.png">
+</head>
+
+    <body class="font-serif bg-gray-200 border-t-4 border-blue-500 antialiased">
+      <div class="w-full p-6 md:w-2/3 md:px-0 md:mx-auto xl:w-2/5">
+        
+<header class="mb-6">
+    
+    <div class="mb-6 md:flex md:items-center">
+      
+        <div>
+            
+            
+            <a class="text-lg mb-8 inline-block" href="/">&larr; Back Home</a>
+            
+            <h1 class="text-4xl font-bold">The Most Useful Hugo Theme Partial</h1>
+            
+            <time datetime="2020-08-23 13:20:43 CDT">23 Aug 2020</time>
+              
+              <ol class="mt-4">
+                  
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="https://krishamoud.me/tags/static-website">static website</a>
+                  </li>
+                  
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="https://krishamoud.me/tags/hugo">hugo</a>
+                  </li>
+                  
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="https://krishamoud.me/tags/partials">partials</a>
+                  </li>
+                  
+              </ol>
+              
+            
+        </div>
+    </div>
+</header>
+
+<article class="mb-12">
+    <p>If you&rsquo;re building a new <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>
+ theme, this is the most useful partial for debugging purposes.  It will show the page variables available to you on any given page.</p>
+<h2 id="output">Output</h2>
+
+<div class="h-40 mb-4 py-4 px-4 overflow-y-auto scrolling-touch border-t border-gray-200">
+    <table class="w-full text-left table-auto table-collapse border-gray-200">
+        <caption class="text-left pb-2">Hugo Variables for the current page.</caption>
+        <thead>
+            <tr class="p-2 font-semibold bg-gray-100 border-t ">
+                <th>Variable</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="p-2 border-t">
+                <td>.Name</td>
+                <td>"The Most Useful Hugo Theme Partial"</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Title</td>
+                <td>"The Most Useful Hugo Theme Partial"</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Kind</td>
+                <td>"page"</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Type</td>
+                <td>"posts"</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.IsPage</td>
+                <td>true</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.IsHome</td>
+                <td>false</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Next</td>
+                <td><nil></td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Prev</td>
+                <td>Page(/examples/clare-example-section.md)</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Params</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="text-right italic pr-2">"date":</td>
+                            <td>time.Time{wall:0x0, ext:63733803643, loc:(*time.Location)(0x6e24420)}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right italic pr-2">"draft":</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right italic pr-2">"iscjklanguage":</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right italic pr-2">"lastmod":</td>
+                            <td>time.Time{wall:0x0, ext:63733803643, loc:(*time.Location)(0x6e24420)}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right italic pr-2">"publishdate":</td>
+                            <td>time.Time{wall:0x0, ext:63733803643, loc:(*time.Location)(0x6e24420)}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right italic pr-2">"tags":</td>
+                            <td>[]string{"static website", "hugo", "partials"}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right italic pr-2">"title":</td>
+                            <td>"The Most Useful Hugo Theme Partial"
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Section</td>
+                <td>"posts"</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.CurrentSection</td>
+                <td>Page(/posts)</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Pages</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="text-right italic pr-2">.Pages</td>
+                            <td>Pages(0)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.Resources</td>
+                <td>[]</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.File</td>
+                <td>posts/useful-hugo-theme-partial.md</td>
+            </tr>
+            <tr class="p-2 border-t">
+                <td>.File.Dir</td>
+                <td>"posts/"</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<h2 id="html">HTML</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- themes/your-theme/layouts/partials/hugo-variables.html --&gt;</span>
+&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;h-40 mb-4 py-4 px-4 overflow-y-auto scrolling-touch border-t border-gray-200&#34;</span>&gt;
+    &lt;<span style="color:#f92672">table</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;w-full text-left table-auto table-collapse border-gray-200&#34;</span>&gt;
+        &lt;<span style="color:#f92672">caption</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-left pb-2&#34;</span>&gt;Hugo Variables for the current page.&lt;/<span style="color:#f92672">caption</span>&gt;
+        &lt;<span style="color:#f92672">thead</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 font-semibold bg-gray-100 border-t &#34;</span>&gt;
+                &lt;<span style="color:#f92672">th</span>&gt;Variable&lt;/<span style="color:#f92672">th</span>&gt;
+                &lt;<span style="color:#f92672">th</span>&gt;Value&lt;/<span style="color:#f92672">th</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+        &lt;/<span style="color:#f92672">thead</span>&gt;
+        &lt;<span style="color:#f92672">tbody</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Name&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .Name }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Title&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .Title }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Kind&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .Kind }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Type&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .Type }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.IsPage&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .IsPage }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.IsHome&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .IsHome }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Next&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%v&#34; .Next }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Prev&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%v&#34; .Prev }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Params&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;
+                    &lt;<span style="color:#f92672">table</span>&gt;
+                        {{ range $k,$v := .Params }}
+                        &lt;<span style="color:#f92672">tr</span>&gt;
+                            &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-right italic pr-2&#34;</span>&gt;{{ printf &#34;%#v:&#34; $k }}&lt;/<span style="color:#f92672">td</span>&gt;
+                            &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; $v }}&lt;/<span style="color:#f92672">td</span>&gt;
+                        &lt;/<span style="color:#f92672">tr</span>&gt;
+                        {{ end }}
+                    &lt;/<span style="color:#f92672">table</span>&gt;
+                &lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Section&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%#v&#34; .Section }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.CurrentSection&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%v&#34; .CurrentSection }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Pages&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;
+                    {{ printf &#34;%v&#34; .Pages }}
+                    &lt;<span style="color:#f92672">table</span>&gt;
+                        {{- range $k,$v := .Pages }}
+                        &lt;<span style="color:#f92672">tr</span>&gt;
+                            &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-right italic pr-2&#34;</span>&gt;{{ printf &#34;%#v:&#34; $k }}&lt;/<span style="color:#f92672">td</span>&gt;
+                            &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%v&#34; $v }}&lt;/<span style="color:#f92672">td</span>&gt;
+                        &lt;/<span style="color:#f92672">tr</span>&gt;
+                        {{ end -}}
+                    &lt;/<span style="color:#f92672">table</span>&gt;
+                &lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.Resources&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ printf &#34;%v&#34; .Resources }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.File&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ if .File }}{{ printf &#34;%v&#34; .File }}{{ else}}&#34;&#34;{{ end }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+            &lt;<span style="color:#f92672">tr</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p-2 border-t&#34;</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;.File.Dir&lt;/<span style="color:#f92672">td</span>&gt;
+                &lt;<span style="color:#f92672">td</span>&gt;{{ if .File }}{{ printf &#34;%#v&#34; .File.Dir }}{{ else}}&#34;&#34;{{ end }}&lt;/<span style="color:#f92672">td</span>&gt;
+            &lt;/<span style="color:#f92672">tr</span>&gt;
+        &lt;/<span style="color:#f92672">tbody</span>&gt;
+    &lt;/<span style="color:#f92672">table</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><h2 id="final">Final</h2>
+<p>Now you can use your partial wherever you want.  I keep mine in my <code>_baseof.html</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{{ .Site.LanguageCode }}&#39;</span>&gt;
+    {{ partial &#34;head.html&#34; . }}
+    &lt;<span style="color:#f92672">body</span>&gt;
+        {{- partial &#34;header.html&#34; . -}}
+        {{- block &#34;main&#34; . }}{{- end }}
+        {{- partial &#34;hugo-variables.html&#34; . -}}
+        {{- partial &#34;footer.html&#34; . -}}
+    &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div>
+</article>
+
+        <div class="">
+<h3 style="text-align: center" class="text-center">Subscribe to my newsletter!</h3>
+<script async data-uid="d2bb073bb7" src="https://kris.ck.page/d2bb073bb7/index.js"></script>
+<br />
+</div>
+<footer>
+    <p>
+        
+    </p>
+</footer>
+<script>
+  if('serviceWorker' in navigator) {
+      navigator.serviceWorker
+          .register('/sw.js', { scope: '/' })
+          .then(function(registration) {
+              
+          });
+
+      navigator.serviceWorker
+          .ready
+          .then(function(registration) {
+              
+          });
+  }
+</script>
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-155739943-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</div>
+    </body>
+</html>

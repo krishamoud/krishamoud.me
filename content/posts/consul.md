@@ -3,13 +3,13 @@ title: "Terraform a Consul cluster with docker on EC2"
 date: 2017-07-19T20:22:25-04:00
 subtitle: ""
 tags: ["terraform", "consul", "docker", "aws", "ec2", "autoscaling"]
-thumbnail: "/images/terraform.jpg"
+thumbnail: "/images/terraform.jpeg"
 readtime: "15 min"
 ---
 
 The goal of this post is to teach you how to configure and launch a production quality, self-healing, Consul cluster using terraform and docker on AWS. This tutorial will be referenced in the future when I show you how to terraform a classic docker swarm.
 
-### Consul, Terraform, AWS
+## Consul, Terraform, AWS
 
 [Consul](https://www.consul.io/) is an open source software created by Hashicorp used for service discovery, configuration management, DNS, KV storage, and more. It’s a powerful tool, and it’s worth learning.
 

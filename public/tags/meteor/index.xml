@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>meteor on Kris Hamoud Makes Things</title>
+    <title>meteor on Kris Hamoud</title>
     <link>https://krishamoud.me/tags/meteor/</link>
-    <description>Recent content in meteor on Kris Hamoud Makes Things</description>
+    <description>Recent content in meteor on Kris Hamoud</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 21 Jul 2017 05:03:27 -0400</lastBuildDate>
@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Running Meteor and Mongo in a Single Docker Container with Supervisord</title>
+      <title>Two Processes One Docker Container with Supervisord</title>
       <link>https://krishamoud.me/posts/meteor-docker-supervisord/</link>
       <pubDate>Fri, 21 Jul 2017 05:03:27 -0400</pubDate>
       
@@ -20,7 +20,7 @@
       <description>The goal of this post is to show you how to run your meteor.js application with MongoDB in one Docker container.
 Note: This should only be done for testing or prototypes.
 Step 1: Get the example app This tutorial was written as of meteor 1.5.1
-git clone https://github.com/meteor/todos mongo-meteor cd mongo-meteor meteor npm install meteor update Note: If you plan to run the application on localhost then you&#39;ll have to remove the app-prod-security package</description>
+git clone https://github.com/meteor/todos mongo-meteor cd mongo-meteor meteor npm install meteor update Note: If you plan to run the application on localhost then you&amp;rsquo;ll have to remove the app-prod-security package</description>
     </item>
     
   </channel>

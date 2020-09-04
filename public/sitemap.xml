@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://krishamoud.me/tags/hugo/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/posts/open-hugo-links-in-new-tabs/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/partials/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/posts/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/static-website/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/tags/</loc>
+    <lastmod>2020-09-03T22:31:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krishamoud.me/posts/useful-hugo-theme-partial/</loc>
+    <lastmod>2020-08-23T13:20:43-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://krishamoud.me/examples/clare-example-section/</loc>
     <lastmod>2020-01-05T20:08:21-06:00</lastmod>
   </url>
@@ -13,17 +53,7 @@
   </url>
   
   <url>
-    <loc>https://krishamoud.me/</loc>
-    <lastmod>2020-01-05T20:08:21-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://krishamoud.me/posts/convertkit-and-bootstrap/</loc>
-    <lastmod>2020-01-02T01:48:12-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://krishamoud.me/posts/</loc>
     <lastmod>2020-01-02T01:48:12-05:00</lastmod>
   </url>
   
@@ -53,17 +83,12 @@
   </url>
   
   <url>
-    <loc>https://krishamoud.me/posts/meteor-docker-supervisord/</loc>
-    <lastmod>2017-07-21T05:03:27-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://krishamoud.me/tags/supervisord/</loc>
     <lastmod>2017-07-21T05:03:27-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://krishamoud.me/tags/</loc>
+    <loc>https://krishamoud.me/posts/meteor-docker-supervisord/</loc>
     <lastmod>2017-07-21T05:03:27-04:00</lastmod>
   </url>
   

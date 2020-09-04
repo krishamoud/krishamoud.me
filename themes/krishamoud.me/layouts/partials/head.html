@@ -1,0 +1,40 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#edf2f7" />
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <title>{{ if not .IsHome }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }}">
+    {{- if .Keywords }}
+    <meta name="keywords" content="{{ delimit .Keywords "," }}" />
+    {{ end -}}
+    {{- if .Params.Author }}
+    <meta name="author" content="{{ .Params.Author}}" />
+    {{ end -}}
+    {{ hugo.Generator }}
+
+    {{- $styles := resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/postcss.config.js") -}}
+    {{- if .Site.IsServer }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+    {{ else }}
+        {{- $styles := $styles| minify | fingerprint | resources.PostProcess -}}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}">
+    {{ end -}}
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+          href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700&display=swap"
+          rel="stylesheet"
+          type="text/css"
+      />
+    </noscript>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-icon-180x180.png">
+</head>

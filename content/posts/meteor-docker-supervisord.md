@@ -1,9 +1,9 @@
 ---
-title: "Running Meteor and Mongo in a Single Docker Container with Supervisord"
+title: "Two Processes One Docker Container with Supervisord"
 date: 2017-07-21T05:03:27-04:00
 subtitle: ""
 tags: ["meteor", "docker", "supervisord", "mongo"]
-thumbnail: "/images/container.jpg"
+thumbnail: "/images/container.jpeg"
 readtime: "10 min"
 ---
 

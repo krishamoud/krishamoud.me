@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "hugo -v",
+    "build": "HUGO_ENVIRONMENT=production hugo -v",
     "deploy": "aws s3 sync public/ s3://krishamoud.me/ --delete --acl public-read --profile kris",
-    "start": "hugo server -ws ."
+    "start": "HUGO_ENVIRONMENT=production hugo server --disableFastRender -ws ."
   },
   "author": "Kris Hamoud",
   "license": "ISC"

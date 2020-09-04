@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#edf2f7" />
+    <link rel="canonical" href="https://krishamoud.me/posts/open-hugo-links-in-new-tabs/" />
+    <title>Open Hugo Links in New Tabs using target _blank | Kris Hamoud</title>
+    <meta name="description" content="Open Hugo Links with target=_blank"><meta name="generator" content="Hugo 0.74.3" /><link rel="stylesheet" href="https://krishamoud.me/css/styles.min.bcd56a619d87c9cc59c02c7df1d26cf2fbf0b73436dcc08f05f90c849cc722d2.css">
+    <meta property="og:title" content="Open Hugo Links in New Tabs using target _blank" />
+<meta property="og:description" content="Open Hugo Links with target=_blank" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://krishamoud.me/posts/open-hugo-links-in-new-tabs/" />
+<meta property="og:image" content="https://krishamoud.me/cover.jpg"/>
+<meta property="article:published_time" content="2020-09-03T22:31:50-05:00" />
+<meta property="article:modified_time" content="2020-09-03T22:31:50-05:00" />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krishamoud.me/cover.jpg"/>
+
+<meta name="twitter:title" content="Open Hugo Links in New Tabs using target _blank"/>
+<meta name="twitter:description" content="Open Hugo Links with target=_blank"/>
+
+    <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+          href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Arvo:400,700&display=swap"
+          rel="stylesheet"
+          type="text/css"
+      />
+    </noscript>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/apple-icon-180x180.png">
+</head>
+
+    <body class="font-serif bg-gray-200 border-t-4 border-blue-500 antialiased">
+      <div class="w-full p-6 md:w-2/3 md:px-0 md:mx-auto xl:w-2/5">
+        
+<header class="mb-6">
+    
+    <div class="mb-6 md:flex md:items-center">
+      
+        <div>
+            
+            
+            <a class="text-lg mb-8 inline-block" href="/">&larr; Back Home</a>
+            
+            <h1 class="text-4xl font-bold">Open Hugo Links in New Tabs Using Target _Blank</h1>
+            
+            <time datetime="2020-09-03 22:31:50 CDT">03 Sep 2020</time>
+              
+              <ol class="mt-4">
+                  
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="https://krishamoud.me/tags/static-website">static website</a>
+                  </li>
+                  
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="https://krishamoud.me/tags/hugo">hugo</a>
+                  </li>
+                  
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="https://krishamoud.me/tags/partials">partials</a>
+                  </li>
+                  
+              </ol>
+              
+            
+        </div>
+    </div>
+</header>
+
+<article class="mb-12">
+    <h2 id="motivation">Motivation</h2>
+<p>By default Hugo links drive visitors off your website.  I don&rsquo;t like that so I figured out how to open links using <code>target=&quot;_blank&quot;</code>.</p>
+<h2 id="change-the-default-markup">Change the Default Markup</h2>
+<p>In your Hugo theme add the file <code>themes/your-theme/layouts/_default/_markup/render-link.html</code> and make it look like the this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- themes/your-theme/layouts/_default/_markup/render-link.html --&gt;</span>
+&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Destination | safeURL }}&#34;</span><span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#a6e22e">with</span> <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">Title</span><span style="color:#960050;background-color:#1e0010">}}</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ . }}&#34;</span><span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#a6e22e">end</span> <span style="color:#960050;background-color:#1e0010">}}{{</span> <span style="color:#a6e22e">if</span> <span style="color:#a6e22e">strings</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">HasPrefix</span> <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">Destination</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#a6e22e">http</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#960050;background-color:#1e0010">}}</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;noopener noreferrer&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span><span style="color:#960050;background-color:#1e0010">{{</span> <span style="color:#a6e22e">end</span> <span style="color:#960050;background-color:#1e0010">}}</span>&gt;{{ .Text }}&lt;/<span style="color:#f92672">a</span>&gt;
+</code></pre></div><p>Now all <a href="https://krishamoud.me" rel="noopener noreferrer" target="_blank">links</a>
+ will open in new tabs.</p>
+
+</article>
+
+        <div class="">
+<h3 style="text-align: center" class="text-center">Subscribe to my newsletter!</h3>
+<script async data-uid="d2bb073bb7" src="https://kris.ck.page/d2bb073bb7/index.js"></script>
+<br />
+</div>
+<footer>
+    <p>
+        
+    </p>
+</footer>
+<script>
+  if('serviceWorker' in navigator) {
+      navigator.serviceWorker
+          .register('/sw.js', { scope: '/' })
+          .then(function(registration) {
+              
+          });
+
+      navigator.serviceWorker
+          .ready
+          .then(function(registration) {
+              
+          });
+  }
+</script>
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-155739943-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</div>
+    </body>
+</html>

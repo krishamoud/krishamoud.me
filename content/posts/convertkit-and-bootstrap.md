@@ -2,7 +2,7 @@
 title: "ConvertKit forms and Twitter Bootstrap"
 date: 2020-01-02T01:48:12-05:00
 draft: false
-thumbnail: "/images/design.jpg"
+thumbnail: "/images/design.jpeg"
 ---
 
 ## Overview
@@ -21,7 +21,7 @@ ConvertKit offers four display formats for forms.  They are:
 Because all the forms on this site are currently inline, I'll only be going over the **Inline** format.  If I ever add any of the other three, I'll update this post.  Within the **Inline** form format, there are _*six*_ templates from which to choose.  In my opinion, Bootstrap Cards and Sections are the two best components to use in conjunction with ConvertKit forms.  They offer great flexibility and ease of use.
 
 #### Bootstrap Cards
-I like these the most, and they are currently the only way I show my forms on this site, but they can be used in multiple different ways.
+I like these the most because they can be used in multiple different ways.
 
 ##### Charlotte Form
 
@@ -118,7 +118,7 @@ They don't look any different than when we created them in the ConvertKit form b
 ```html
 <div class="col-md-6">
   <div class="card profile" >
-    <img class="card-img-top" src="/profile.png" alt="Card image cap">
+    <img class="card-img-top" src="/images/profile.png" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Kris Hamoud</h5>
         <p class="card-text">Traveler. Guy on the internet. Infrastructure engineer <a href="https://convertkit.com" target="_blank" rel="noopener noreferrer">@ConvertKit</a></p>
@@ -140,7 +140,7 @@ They don't look any different than when we created them in the ConvertKit form b
 {{< rawhtml >}}
 <div class="col-md-6">
   <div class="card profile" >
-    <img class="card-img-top" src="/profile.png" alt="Card image cap">
+    <img class="card-img-top" src="/images/profile.png" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Kris Hamoud</h5>
         <p class="card-text">Traveler. Guy on the internet. Infrastructure engineer <a href="https://convertkit.com" target="_blank"_ rel="noopener noreferrer">@ConvertKit</a></p>

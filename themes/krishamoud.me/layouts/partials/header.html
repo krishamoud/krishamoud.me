@@ -1,0 +1,37 @@
+{{ $currentPath := printf "/" }}
+<header class="mb-6">
+    <!-- All the pages must have a heading block, defaults to a link for the home page and a title. -->
+    <div class="mb-6 md:flex md:items-center">
+      {{ if and (.Site.Params.Avatar) (eq $currentPath .Page.RelPermalink ) }}
+      <img class="hidden md:block w-20 rounded-full object-scale-down mr-6" src="{{ .Site.Params.Avatar | absURL }}" alt="{{ .Site.Params.Author }}">
+      {{ end }}
+        <div>
+            {{ $post := in .Page.RelPermalink "posts" }}
+            {{ if ne $currentPath .Page.RelPermalink }}
+            <a class="text-lg mb-8 inline-block" href="{{ .Site.BaseURL | relLangURL }}">&larr; Back Home</a>
+            {{ end }}
+            <h1 class="text-4xl font-bold">{{ title .Title }}</h1>
+            {{ if and ( ne $currentPath .Page.RelPermalink ) ( eq $post true )}}
+            <time datetime="{{ .Date.Format "2006-01-02 15:04:05 MST" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+              {{ with .Params.tags }}
+              <ol class="mt-4">
+                  {{ range . }}
+                  <li class="inline-block">
+                      <a class="border-none text-gray-800 text-xs bg-gray-400 hover:bg-gray-600 hover:text-white rounded-sm px-3 py-1" href="{{ "tags" | absURL }}/{{ . | urlize }}">{{ . }}</a>
+                  </li>
+                  {{ end }}
+              </ol>
+              {{ end }}
+            {{ else }}
+              {{ if eq $currentPath .Page.RelPermalink }}
+              <p>{{ .Site.Params.tagline }} <a href="{{ .Site.Params.companyURL }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.Company }}</a>
+              <br/>
+              <a href="{{ .Site.Params.social.github }}" target="_blank" rel="noopener noreferrer">Github</a> /
+              <a href="{{ .Site.Params.social.twitter }}" target="_blank" rel="noopener noreferrer">Twitter</a> /
+              <a href="{{ .Site.Params.social.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </p>
+              {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</header>

@@ -1,19 +1,21 @@
 baseURL = "https://krishamoud.me"
 languageCode = "en-us"
-title = "Kris Hamoud Makes Things"
-theme = "krishamoud"
+title = "Kris Hamoud"
+theme = "krishamoud.me"
 staticDir = ["static"]
+googleAnalytics = "UA-155739943-1"
 
 [Params]
   creator = "Kris Hamoud"
-  company = "ConvertKit"
+  company = "@ConvertKit"
   companyURL = "https://convertkit.com"
-  description = "Traveler. Guy on the internet. Infrastructure engineer @ConvertKit"
-  bio = "Traveler. Guy on the internet. Infrastructure engineer"
+  description = "Air Nomad. Guy on the internet. Infrastructure engineer @ConvertKit"
+  tagline = "Air Nomad. Guy on the internet. Infrastructure engineer"
   metadescription = "Used as 'description' meta tag for both home and index pages. If not set, 'description' will be used instead"
   aboutURL = "/pages/about/"
   image = "/cover.jpg"
-  profilePic = "/profile.png"
+  Avatar = "/images/profile.png"
+  images = ["/cover.jpg"]
   authorlocation = "Paris, France"
   authorwebsite = "http://vjeantet.fr"
   authorbio= "my bio"
@@ -43,5 +45,5 @@ staticDir = ["static"]
 
   [Params.social]
     twitter = "https://twitter.com/krishamoud"
-    linkedin-in = "https://linkedin.com/in/kristopher-hamoud-17b34665"
-    github-alt = "https://github.com/krishamoud"
+    linkedin = "https://linkedin.com/in/kristopher-hamoud-17b34665"
+    github = "https://github.com/krishamoud"
